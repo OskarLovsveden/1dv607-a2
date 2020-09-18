@@ -1,4 +1,7 @@
 using System;
+using Model;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace View
 {
@@ -58,6 +61,22 @@ namespace View
                         break;
                 }
             return show;
+        }
+
+        private void RegisterMemberForm()
+        {
+            //TODO: add code for recieving userinput.
+        }
+        private void RegisterMember(string name, string id, PersonalID pid)
+        {
+            Member newMember = new Member(string name, string id, PersonalID pid);
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter sw = new StreamWriter("../Registry/MemberRegistry/MemberRegistry.json"))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                //TODO: Check that code works
+                serializer.Serialize(writer, newMember);
+            }
         }
 
         public ViewType Run()
