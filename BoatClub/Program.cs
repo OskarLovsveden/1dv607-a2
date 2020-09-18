@@ -6,13 +6,13 @@ namespace BoatClub
     {
         static void Main(string[] args)
         {
-            ShowMenus(Views.Start);
+            ShowMenus(ViewType.Start);
         }
 
-        private static void ShowMenus(Views start)
+        private static void ShowMenus(ViewType start)
         {
             bool show = true;
-            Views currenView = start;
+            ViewType currenView = start;
             
             // Instantiate all views
             View.Start startView = new View.Start();
@@ -26,19 +26,19 @@ namespace BoatClub
             {
                 switch (currenView)
                 {
-                    case Views.Start:
+                    case ViewType.Start:
                         currenView = startView.Run();
                         break;
-                    case Views.MemberList:
+                    case ViewType.MemberList:
                         currenView = memberListView.Run();
                         break;
-                    case Views.Member:
+                    case ViewType.Member:
                         currenView = memberView.Run();
                         break;
-                    case Views.BoatList:
+                    case ViewType.BoatList:
                         currenView = boatListView.Run();
                         break;
-                    case Views.Boat:
+                    case ViewType.Boat:
                         currenView = boatView.Run();
                         break;
                     default:

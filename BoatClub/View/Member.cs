@@ -4,13 +4,13 @@ namespace View
 {
     public class Member
     {
-        public Views NextView { get; set; }
+        public ViewType NextView { get; set; }
         public Member()
         {
-            NextView = Views.Start;
+            NextView = ViewType.Start;
         }
 
-        public Views Run()
+        public ViewType Run()
         {
 
             return NextView;

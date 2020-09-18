@@ -4,13 +4,29 @@ namespace View
 {
     public class Start
     {
-        public Views NextView { get; set; }
+        public ViewType NextView { get; set; }
         public Start()
         {
-            NextView = Views.Start;
+            NextView = ViewType.Start;
         }
-        
-        public Views Run()
+
+        public void showMenu() {
+            Console.WriteLine("Choose something");
+            Console.WriteLine("1) Register ");
+            Console.WriteLine("2) List members ");
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    NextView = ViewType.Register;
+                    break;
+                
+                default:
+                    NextView = ViewType.Start;
+            }
+        }
+
+        public ViewType Run()
         {
 
             return NextView;
