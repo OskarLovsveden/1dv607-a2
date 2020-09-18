@@ -9,27 +9,38 @@ namespace BoatClub
         {
             ShowMenus(Views.Start);
         }
-    }
 
-    private void ShowMenus (enum Start)
-    {
-        boolean continue = true;
-        enum currenView = Start;
-
-        while (continue)
+        private static void ShowMenus(Views start)
         {
-            switch (currenView)
-            {
-                case Start:
-                    currenView = StartView.Run();
-                    Break;
-                case MemberList:
-                    currenView = MemberListView.Run();
-                    Break;
-                default:
-                    continue = false;
-            }
-        }
+            bool show = true;
 
+            Views currenView = start;
+
+            while (show)
+            {
+                switch (currenView)
+                {
+                    case Views.Start:
+                        currenView = StartView.Run();
+                        break;
+                    case Views.MemberList:
+                        currenView = MemberListView.Run();
+                        break;
+                    case Views.Member:
+                        currenView = MemberView.Run();
+                        break;
+                    case Views.BoatList:
+                        currenView = BoatListView.Run();
+                        break;
+                    case Views.Boat:
+                        currenView = BoatView.Run();
+                        break;
+                    default:
+                        show = false;
+                        break;
+                }
+            }
+
+        }
     }
 }

@@ -2,5 +2,6 @@ enum Views {
     Start,
     Boat,
     BoatList,
-    Member
+    Member,
+    MemberList
 }
