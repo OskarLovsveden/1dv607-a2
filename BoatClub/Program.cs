@@ -12,7 +12,8 @@ namespace BoatClub
         private static void ShowMenus(ViewType start)
         {
             bool show = true;
-            ViewType currenView = start;
+            ViewType currentView = start;
+            ViewType previousView = start;
             
             // Instantiate all views
             View.Start startView = new View.Start();
@@ -24,22 +25,22 @@ namespace BoatClub
 
             while (show)
             {
-                switch (currenView)
+                switch (currentView)
                 {
                     case ViewType.Start:
-                        currenView = startView.Run();
+                        currentView = startView.Run();
                         break;
                     case ViewType.MemberList:
-                        currenView = memberListView.Run();
+                        currentView = memberListView.Run();
                         break;
                     case ViewType.Member:
-                        currenView = memberView.Run();
+                        currentView = memberView.Run();
                         break;
                     case ViewType.BoatList:
-                        currenView = boatListView.Run();
+                        currentView = boatListView.Run();
                         break;
                     case ViewType.Boat:
-                        currenView = boatView.Run();
+                        currentView = boatView.Run();
                         break;
                     default:
                         show = false;

@@ -4,5 +4,6 @@ public enum ViewType {
     BoatList,
     Member,
     MemberList,
-    Register
+    Register,
+    Quit
 }

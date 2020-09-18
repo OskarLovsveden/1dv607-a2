@@ -4,31 +4,65 @@ namespace View
 {
     public class Start
     {
+        private string errorMessage = "";
         public ViewType NextView { get; set; }
         public Start()
         {
             NextView = ViewType.Start;
         }
 
-        public void showMenu() {
-            Console.WriteLine("Choose something");
-            Console.WriteLine("1) Register ");
-            Console.WriteLine("2) List members ");
+        private void showMenu() {
+            bool show = true;
 
-            switch (Console.ReadLine())
+            while (show)
             {
-                case "1":
-                    NextView = ViewType.Register;
-                    break;
-                
-                default:
-                    NextView = ViewType.Start;
+                PrintMenuMessgae();
+                show = GetMenuChoice(); 
             }
+
+        }
+
+        private void PrintMenuMessgae()
+        {
+            Console.ResetColor();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Choose something");
+            Console.WriteLine("1) Register");
+            Console.WriteLine("2) List members");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("0) Exit");
+            Console.ResetColor();
+        }
+
+        private bool GetMenuChoice()
+        {
+            bool show = true;
+            switch (Console.ReadLine())
+                {
+                    case "1":
+                        NextView = ViewType.Register;
+                        show = false;
+                        break;
+                    case "2":
+                        NextView = ViewType.MemberList;
+                        show = false;
+                        break;
+                    
+                    case "0":
+                        NextView = ViewType.Quit;
+                        show = false;
+                        break;
+                    
+                    default:
+                        break;
+                }
+            return show;
         }
 
         public ViewType Run()
         {
-
+            showMenu();
             return NextView;
         }
     }
