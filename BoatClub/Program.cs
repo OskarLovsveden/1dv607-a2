@@ -1,4 +1,5 @@
 ﻿using System;
+using Views;
 
 namespace BoatClub
 {
@@ -6,7 +7,29 @@ namespace BoatClub
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ShowMenus(Views.Start);
         }
+    }
+
+    private void ShowMenus (enum Start)
+    {
+        boolean continue = true;
+        enum currenView = Start;
+
+        while (continue)
+        {
+            switch (currenView)
+            {
+                case Start:
+                    currenView = StartView.Run();
+                    Break;
+                case MemberList:
+                    currenView = MemberListView.Run();
+                    Break;
+                default:
+                    continue = false;
+            }
+        }
+
     }
 }
