@@ -11,7 +11,7 @@ namespace View
             NextView = ViewType.Start;
         }
 
-        private void showMenu() {
+        private void ShowMenu() {
             bool show = true;
 
             while (show)
@@ -62,7 +62,7 @@ namespace View
 
         public ViewType Run()
         {
-            showMenu();
+            ShowMenu();
             return NextView;
         }
     }

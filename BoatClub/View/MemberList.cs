@@ -10,7 +10,7 @@ namespace View
         {
             NextView = ViewType.Start;
         }
-        private void showMenu() {
+        private void ShowMenu() {
             bool show = true;
 
             while (show)
@@ -39,11 +39,11 @@ namespace View
              switch (Console.ReadLine())
                 {
                     case "1":
-                        Console.WriteLine("Showing verbose list of members");
+                        ShowVerboseList();
                         show = false;
                         break;
                     case "2":
-                        Console.WriteLine("Showing compact list of members");
+                        ShowCompactList();
                         show = false;
                         break;
                     case "0":
@@ -55,9 +55,19 @@ namespace View
                 }
             return show;
         }
+
+        private void ShowVerboseList()
+        {
+            System.Console.WriteLine("Listing verbose files");
+        }
+        
+        private void ShowCompactList()
+        {
+            System.Console.WriteLine("Listing compact files");
+        }
         public ViewType Run( )
         {
-            showMenu();
+            ShowMenu();
             return NextView;
         }
     }
