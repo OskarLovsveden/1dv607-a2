@@ -4,16 +4,15 @@ namespace View
 {
     public class Boat
     {
-        // private Views nextView;
-        
-        public Views NextView { get; set; }
-        public Boat() {
-            NextView = Views.Start;
+        public ViewType NextView { get; set; }
+        public Boat() 
+        {
+            NextView = ViewType.Start;
         }
 
-        public Views Run()
+        public ViewType Run()
         {
-            
+
             return NextView;
         }
         
