@@ -1,5 +1,4 @@
 ﻿using System;
-using View;
 
 namespace BoatClub
 {
@@ -15,26 +14,32 @@ namespace BoatClub
             bool show = true;
             Views currenView = start;
             
-            
+            // Instantiate all views
+            View.Start startView = new View.Start();
+            View.Boat boatView = new View.Boat();
+            View.BoatList boatListView = new View.BoatList();
+            View.Member memberView = new View.Member();
+            View.MemberList memberListView = new View.MemberList();
+
 
             while (show)
             {
                 switch (currenView)
                 {
                     case Views.Start:
-                        currenView = StartView.Run();
+                        currenView = startView.Run();
                         break;
                     case Views.MemberList:
-                        currenView = MemberListView.Run();
+                        currenView = memberListView.Run();
                         break;
                     case Views.Member:
-                        currenView = MemberView.Run();
+                        currenView = memberView.Run();
                         break;
                     case Views.BoatList:
-                        currenView = BoatListView.Run();
+                        currenView = boatListView.Run();
                         break;
                     case Views.Boat:
-                        currenView = BoatView.Run();
+                        currenView = boatView.Run();
                         break;
                     default:
                         show = false;
