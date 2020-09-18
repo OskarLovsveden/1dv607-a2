@@ -1,5 +1,5 @@
 ﻿using System;
-using Views;
+using View;
 
 namespace BoatClub
 {
@@ -13,8 +13,9 @@ namespace BoatClub
         private static void ShowMenus(Views start)
         {
             bool show = true;
-
             Views currenView = start;
+            
+            
 
             while (show)
             {
