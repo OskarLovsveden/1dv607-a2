@@ -1,5 +1,4 @@
 ﻿using System;
-using View;
 
 namespace BoatClub
 {
@@ -7,34 +6,41 @@ namespace BoatClub
     {
         static void Main(string[] args)
         {
-            ShowMenus(Views.Start);
+            ShowMenus(ViewType.Start);
         }
 
-        private static void ShowMenus(Views start)
+        private static void ShowMenus(ViewType start)
         {
             bool show = true;
-            Views currenView = start;
+            ViewType currentView = start;
+            ViewType previousView = start;
             
-            
+            // Instantiate all views
+            View.Start startView = new View.Start();
+            View.Boat boatView = new View.Boat();
+            View.BoatList boatListView = new View.BoatList();
+            View.Member memberView = new View.Member();
+            View.MemberList memberListView = new View.MemberList();
+
 
             while (show)
             {
-                switch (currenView)
+                switch (currentView)
                 {
-                    case Views.Start:
-                        currenView = StartView.Run();
+                    case ViewType.Start:
+                        currentView = startView.Run();
                         break;
-                    case Views.MemberList:
-                        currenView = MemberListView.Run();
+                    case ViewType.MemberList:
+                        currentView = memberListView.Run();
                         break;
-                    case Views.Member:
-                        currenView = MemberView.Run();
+                    case ViewType.Member:
+                        currentView = memberView.Run();
                         break;
-                    case Views.BoatList:
-                        currenView = BoatListView.Run();
+                    case ViewType.BoatList:
+                        currentView = boatListView.Run();
                         break;
-                    case Views.Boat:
-                        currenView = BoatView.Run();
+                    case ViewType.Boat:
+                        currentView = boatView.Run();
                         break;
                     default:
                         show = false;
