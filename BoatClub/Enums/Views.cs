@@ -1,4 +1,4 @@
-enum Views {
+public enum Views {
     Start,
     Boat,
     BoatList,
