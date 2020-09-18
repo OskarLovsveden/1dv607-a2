@@ -36,6 +36,7 @@ namespace Model
             get => _boatList;
             set => _boatList = value;
         }
+        public int BoatCount { get => BoatList.Count; }
 
         public string ToString(string format)
         {
