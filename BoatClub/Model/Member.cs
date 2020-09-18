@@ -1,3 +1,5 @@
+using System;
+
 namespace Model
 {
     class Member
@@ -34,5 +36,25 @@ namespace Model
             get => _boatList;
             set => _boatList = value;
         }
+
+        public string ToString(string format)
+        {
+            switch (format)
+            {
+                // “Verbose List”; name, personal number, member id and boats with boat information
+                case "Verbose":
+                    return $"Name: {Name}\nPersonal Identification Number: {PID}\nMember ID: {ID}\nBoats:\n{BoatList.ToString()}";
+                // “Compact List”; name, member id and number of boats
+                case "Compact":
+                    return $"Name: {Name}\nMember ID: {ID}\nNumber of boats: {BoatCount}";
+                case null:
+                case "":
+                    throw new FormatException("Could not format the text representation.");
+                default:
+                    throw new FormatException("Could not format the text representation.");
+            }
+        }
+
+        public override string ToString() => ToString();
     }
 }
