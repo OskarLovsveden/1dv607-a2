@@ -19,7 +19,11 @@ namespace View
 
             while (show)
             {
+<<<<<<< HEAD
+                PrintMenuMessage();
+=======
                 PrintMenuMessgae();
+>>>>>>> 009d2fe23b9fd83f68b5239b3d5ac2ac8aa1c901
                 show = GetMenuChoice();
             }
 
