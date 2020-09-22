@@ -7,7 +7,6 @@ namespace View
 {
     public class Start
     {
-        private string errorMessage = "";
         public ViewType NextView { get; set; }
         public Start()
         {
@@ -19,13 +18,13 @@ namespace View
 
             while (show)
             {
-                PrintMenuMessgae();
+                PrintMenuMessage();
                 show = GetMenuChoice(); 
             }
 
         }
 
-        private void PrintMenuMessgae()
+        private void PrintMenuMessage()
         {
             Console.ResetColor();
             Console.Clear();
@@ -69,14 +68,14 @@ namespace View
         }
         private void RegisterMember(string name, string id, PersonalID pid)
         {
-            Member newMember = new Member(string name, string id, PersonalID pid);
-            JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter("../Registry/MemberRegistry/MemberRegistry.json"))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                //TODO: Check that code works
-                serializer.Serialize(writer, newMember);
-            }
+            // Member newMember = new Member(string name, string id, PersonalID pid);
+            // JsonSerializer serializer = new JsonSerializer();
+            // using (StreamWriter sw = new StreamWriter("../Registry/MemberRegistry/MemberRegistry.json"))
+            // using (JsonWriter writer = new JsonTextWriter(sw))
+            // {
+            //     //TODO: Check that code works
+            //     serializer.Serialize(writer, newMember);
+            // }
         }
 
         public ViewType Run()
