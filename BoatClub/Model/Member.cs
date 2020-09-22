@@ -56,6 +56,6 @@ namespace Model
             }
         }
 
-        public override string ToString() => ToString();
+        public override string ToString() => ToString("Verbose");
     }
 }

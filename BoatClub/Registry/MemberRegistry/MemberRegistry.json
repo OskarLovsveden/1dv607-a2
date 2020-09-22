@@ -1,1 +1,24 @@
-{"Name":"Patty","ID":"888","PID":{"Pid":"891126-5555"},"BoatList":{"Count":0},"BoatCount":0}
+[
+  {
+    "Name": "John",
+    "ID": "789",
+    "PID": {
+      "Pid": "891126-5555"
+    },
+    "BoatList": {
+      "Count": 0
+    },
+    "BoatCount": 0
+  },
+  {
+    "Name": "Doe",
+    "ID": "789",
+    "PID": {
+      "Pid": "891126-5555"
+    },
+    "BoatList": {
+      "Count": 0
+    },
+    "BoatCount": 0
+  }
+]
