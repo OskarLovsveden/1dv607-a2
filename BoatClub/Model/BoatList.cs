@@ -11,7 +11,13 @@ namespace Model
             get => _boats.Count;
         }
 
-        public void Add(Boat boat) 
+        public List<Boat> Boats
+        {
+            get => _boats;
+            set => _boats = value;
+        }
+
+        public void Add(Boat boat)
         {
             _boats.Add(boat);
         }
