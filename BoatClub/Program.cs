@@ -6,7 +6,8 @@ namespace BoatClub
     {
         static void Main(string[] args)
         {
-            ShowMenus(ViewType.Start);
+            Model.MemberList mList = new Model.MemberList();
+            // ShowMenus(ViewType.Start);
         }
 
         private static void ShowMenus(ViewType start)
