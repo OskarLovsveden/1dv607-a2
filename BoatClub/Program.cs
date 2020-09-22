@@ -15,7 +15,7 @@ namespace BoatClub
             bool show = true;
             ViewType currentView = start;
             ViewType previousView = start;
-            
+
             // Instantiate all views
             View.Start startView = new View.Start();
             View.Boat boatView = new View.Boat();

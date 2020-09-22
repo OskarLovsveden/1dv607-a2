@@ -22,7 +22,7 @@ namespace Model
         private void writeMemberToDirectory(Member member)
         {
             string jsonString = JsonSerializer.Serialize(member);
-            File.AppendText("Registry/MemberRegistry/MemberRegistry.json", jsonString);
+            // File.AppendText("Registry/MemberRegistry/MemberRegistry.json", jsonString);
 
             // TODO: Recomended code from forums on internet, seems mor complicated that the code above tho.
             // JsonSerializer serializer = new JsonSerializer();
@@ -34,13 +34,13 @@ namespace Model
             // }
 
         }
-        public void Add(Member member) 
+        public void Add(Member member)
         {
             _members.Add(member);
         }
         // private  List<T> GetMembersFromDirectory()
         // {
-            
+
         // }
         public override string ToString() => string.Join("\n", _members);
     }
