@@ -2,9 +2,9 @@
   "version": 2,
   "dgSpecHash": "XR34vyUNlD5QtoGX2TywGM93BVfMvV+T6RPmaCwV/JMHKmqsVi2ZTMUkmGFocSy2vsJAcg4/Bll9U+070AS2mA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Sofie\\1dv607\\1dv607-assignment-2\\BoatClub\\BoatClub.csproj",
+  "projectFilePath": "C:\\Users\\OskarLovsveden\\1dv607\\1dv607-assignment-2\\BoatClub\\BoatClub.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Sofie\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\OskarLovsveden\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }

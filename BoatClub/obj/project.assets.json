@@ -52,19 +52,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sofie\\.nuget\\packages\\": {}
+    "C:\\Users\\OskarLovsveden\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sofie\\1dv607\\1dv607-assignment-2\\BoatClub\\BoatClub.csproj",
+      "projectUniqueName": "C:\\Users\\OskarLovsveden\\1dv607\\1dv607-assignment-2\\BoatClub\\BoatClub.csproj",
       "projectName": "BoatClub",
-      "projectPath": "C:\\Users\\Sofie\\1dv607\\1dv607-assignment-2\\BoatClub\\BoatClub.csproj",
-      "packagesPath": "C:\\Users\\Sofie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sofie\\1dv607\\1dv607-assignment-2\\BoatClub\\obj\\",
+      "projectPath": "C:\\Users\\OskarLovsveden\\1dv607\\1dv607-assignment-2\\BoatClub\\BoatClub.csproj",
+      "packagesPath": "C:\\Users\\OskarLovsveden\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\OskarLovsveden\\1dv607\\1dv607-assignment-2\\BoatClub\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sofie\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\OskarLovsveden\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -106,7 +106,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

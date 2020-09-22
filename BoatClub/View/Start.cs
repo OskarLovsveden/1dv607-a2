@@ -13,13 +13,14 @@ namespace View
             NextView = ViewType.Start;
         }
 
-        private void ShowMenu() {
+        private void ShowMenu()
+        {
             bool show = true;
 
             while (show)
             {
-                PrintMenuMessage();
-                show = GetMenuChoice(); 
+                PrintMenuMessgae();
+                show = GetMenuChoice();
             }
 
         }
@@ -41,24 +42,24 @@ namespace View
         {
             bool show = true;
             switch (Console.ReadLine())
-                {
-                    case "1":
-                        NextView = ViewType.Register;
-                        show = false;
-                        break;
-                    case "2":
-                        NextView = ViewType.MemberList;
-                        show = false;
-                        break;
-                    
-                    case "0":
-                        NextView = ViewType.Quit;
-                        show = false;
-                        break;
-                    
-                    default:
-                        break;
-                }
+            {
+                case "1":
+                    NextView = ViewType.Register;
+                    show = false;
+                    break;
+                case "2":
+                    NextView = ViewType.MemberList;
+                    show = false;
+                    break;
+
+                case "0":
+                    NextView = ViewType.Quit;
+                    show = false;
+                    break;
+
+                default:
+                    break;
+            }
             return show;
         }
 
@@ -68,14 +69,14 @@ namespace View
         }
         private void RegisterMember(string name, string id, PersonalID pid)
         {
-            // Member newMember = new Member(string name, string id, PersonalID pid);
-            // JsonSerializer serializer = new JsonSerializer();
-            // using (StreamWriter sw = new StreamWriter("../Registry/MemberRegistry/MemberRegistry.json"))
-            // using (JsonWriter writer = new JsonTextWriter(sw))
-            // {
-            //     //TODO: Check that code works
-            //     serializer.Serialize(writer, newMember);
-            // }
+            Model.Member newMember = new Model.Member(name, id, pid);
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter sw = new StreamWriter("../Registry/MemberRegistry/MemberRegistry.json"))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                //TODO: Check that code works
+                serializer.Serialize(writer, newMember);
+            }
         }
 
         public ViewType Run()
