@@ -19,12 +19,9 @@ namespace View
 
             while (show)
             {
-<<<<<<< HEAD
                 PrintMenuMessage();
-=======
-                PrintMenuMessgae();
->>>>>>> 009d2fe23b9fd83f68b5239b3d5ac2ac8aa1c901
-                show = GetMenuChoice();
+                show = GetMenuChoice(); 
+
             }
 
         }
@@ -73,14 +70,7 @@ namespace View
         }
         private void RegisterMember(string name, string id, PersonalID pid)
         {
-            Model.Member newMember = new Model.Member(name, id, pid);
-            JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter("../Registry/MemberRegistry/MemberRegistry.json"))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                //TODO: Check that code works
-                serializer.Serialize(writer, newMember);
-            }
+
         }
 
         public ViewType Run()

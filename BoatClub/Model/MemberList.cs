@@ -1,47 +1,37 @@
 using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.IO;
-// using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace Model
 {
     public class MemberList
     {
-        private List<Member> _members = new List<Member>();
+        private List<Member> _members;
+        private string _registryPath = "Registry/MemberRegistry/MemberRegistry.json";
 
         public MemberList()
         {
-            PersonalID pid = new PersonalID("891126-5555");
-            Member m = new Member("John", "789", pid);
-            Member p = new Member("Patty", "888", pid);
-            writeMemberToDirectory(m);
-            writeMemberToDirectory(p);
-            // _members = GetMembersFromDirectory();
+            _members = GetMemberList();
+
         }
-        private void writeMemberToDirectory(Member member)
+        private List<Member> GetMemberList()
         {
-            string jsonString = JsonSerializer.Serialize(member);
-            // File.AppendText("Registry/MemberRegistry/MemberRegistry.json", jsonString);
-
-            // TODO: Recomended code from forums on internet, seems mor complicated that the code above tho.
-            // JsonSerializer serializer = new JsonSerializer();
-            // using (StreamWriter sw = new StreamWriter("Registry/MemberRegistry/MemberRegistry.json"))
-            // using (JsonWriter writer = new JsonTextWriter(sw))
-            // {
-            //     //TODO: Check that code works
-            //     serializer.Serialize(writer, member);
-            // }
-
+            using (StreamReader r = new StreamReader(_registryPath))
+            {
+                string json = r.ReadToEnd();
+                return JsonConvert.DeserializeObject<List<Member>>(json);
+            }
         }
-        public void Add(Member member)
+        private void writeListToRegistry(List<Member> members)
+        {
+            var j = JsonConvert.SerializeObject(members, Formatting.Indented);
+            File.WriteAllText(_registryPath, j);
+        }
+        public void Add(Member member) 
         {
             _members.Add(member);
         }
-        // private  List<T> GetMembersFromDirectory()
-        // {
 
-        // }
         public override string ToString() => string.Join("\n", _members);
     }
 }
