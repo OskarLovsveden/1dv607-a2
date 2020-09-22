@@ -4,7 +4,6 @@ namespace View
 {
     public class MemberList
     {
-        private string _errorMessage = "";
         public ViewType NextView { get; set; }
         public MemberList()
         {

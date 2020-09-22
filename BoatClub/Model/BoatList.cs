@@ -4,14 +4,14 @@ namespace Model
 {
     public class BoatList
     {
-        private List<Boat> _boats;
+        private List<Boat> _boats = new List<Boat>();
 
         public int Count
         {
             get => _boats.Count;
         }
 
-        public void add(Boat boat) 
+        public void Add(Boat boat) 
         {
             _boats.Add(boat);
         }

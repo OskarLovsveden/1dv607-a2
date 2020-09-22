@@ -2,7 +2,7 @@ using System;
 
 namespace Model
 {
-    class Member
+    public class Member
     {
         private string _name;
         private string _ID;
