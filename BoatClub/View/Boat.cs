@@ -1,21 +1,14 @@
-using System;
+using Model.Menu;
 
 namespace View
 {
     public class Boat
     {
-        public ViewType NextView { get; set; }
-        public Boat() 
-        {
-            NextView = ViewType.Start;
-        }
+        public MenuItems MenuItems { get; set; }
 
-        public ViewType Run()
-        {
 
-            return NextView;
+        public Boat()
+        {
         }
-        
     }
-
 }

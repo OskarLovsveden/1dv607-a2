@@ -1,82 +1,19 @@
 using System;
-using Model;
-using Newtonsoft.Json;
-using System.IO;
+using Model.Menu;
 
 namespace View
 {
     public class Start
     {
-        public ViewType NextView { get; set; }
+
+        public MenuItems MenuItems { get; set; }
+
         public Start()
         {
-            NextView = ViewType.Start;
-        }
-
-        private void ShowMenu()
-        {
-            bool show = true;
-
-            while (show)
-            {
-                PrintMenuMessage();
-                show = GetMenuChoice(); 
-
-            }
-
-        }
-
-        private void PrintMenuMessage()
-        {
-            Console.ResetColor();
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Choose something");
-            Console.WriteLine("1) Register");
-            Console.WriteLine("2) List members");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("0) Exit");
-            Console.ResetColor();
-        }
-
-        private bool GetMenuChoice()
-        {
-            bool show = true;
-            switch (Console.ReadLine())
-            {
-                case "1":
-                    NextView = ViewType.Register;
-                    show = false;
-                    break;
-                case "2":
-                    NextView = ViewType.MemberList;
-                    show = false;
-                    break;
-
-                case "0":
-                    NextView = ViewType.Quit;
-                    show = false;
-                    break;
-
-                default:
-                    break;
-            }
-            return show;
-        }
-
-        private void RegisterMemberForm()
-        {
-            //TODO: add code for recieving userinput.
-        }
-        private void RegisterMember(string name, string id, PersonalID pid)
-        {
-
-        }
-
-        public ViewType Run()
-        {
-            ShowMenu();
-            return NextView;
+            MenuItems = new MenuItems("Choose your own adventure");
+            MenuItems.Add(new MenuItem("1) Register", () => Console.WriteLine("Register"), "1", ViewType.Register));
+            MenuItems.Add(new MenuItem("2) List Members", () => Console.WriteLine("member list"), "2", ViewType.MemberList));
+            MenuItems.Add(new MenuItem("0) Exit", () => Console.WriteLine("Exit"), "0", ViewType.Quit));
         }
     }
 }

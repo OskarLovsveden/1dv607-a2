@@ -1,75 +1,65 @@
 using System;
+using System.Collections.Generic;
+using Model.Menu;
 
 namespace View
 {
     public class MemberList
     {
-        public ViewType NextView { get; set; }
+
+        public MenuItems MenuItems { get; set; }
+
         public MemberList()
         {
-            NextView = ViewType.Start;
+            ChooseListType();
         }
-        private void ShowMenu()
-        {
-            bool show = true;
 
-            while (show)
+        public void ChooseListType()
+        {
+            MenuItems = new MenuItems("Choose type of list:");
+            MenuItems.Add(new MenuItem("1) Verbose", () => ShowMembersVerbose(), "1", ViewType.MemberList));
+            MenuItems.Add(new MenuItem("2) Compact", () => ShowMembersCompact(), "2", ViewType.MemberList));
+            MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Start));
+        }
+
+        public void ShowMembersVerbose()
+        {
+            List<string> members = new List<string>() {
+                "Verbose1",
+                "Verbose2",
+                "Verbose3",
+                "Verbose4",
+                "Verbose5"
+            };
+
+            MenuItems = new MenuItems("Members:");
+            for (int i = 0; i < members.Count; i++)
             {
-                PrintMenuMessage();
-                show = GetMenuChoice();
+                int copyIndex = i;
+                MenuItems.Add(new MenuItem(members[copyIndex], () => Console.WriteLine(members[copyIndex]), $"{copyIndex + 1}", ViewType.Member));
             }
+
+            MenuItems.Add(new MenuItem("0) Go Back", () => ChooseListType(), "0", ViewType.MemberList));
         }
 
-        private void PrintMenuMessage()
+        public void ShowMembersCompact()
         {
-            Console.Clear();
-            Console.ResetColor();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Choose List to view");
-            Console.WriteLine("1) Verbose");
-            Console.WriteLine("2) Compact");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("0) Back");
-            Console.ResetColor();
-        }
+            List<string> members = new List<string>() {
+                "Compact1",
+                "Compact2",
+                "Compact3",
+                "Compact4",
+                "Compact5"
+            };
 
-        private bool GetMenuChoice()
-        {
-            bool show = true;
-            switch (Console.ReadLine())
+            MenuItems = new MenuItems("Members:");
+            for (int i = 0; i < members.Count; i++)
             {
-                case "1":
-                    ShowVerboseList();
-                    show = false;
-                    break;
-                case "2":
-                    ShowCompactList();
-                    show = false;
-                    break;
-                case "0":
-                    NextView = ViewType.Start;
-                    show = false;
-                    break;
-                default:
-                    break;
+                int copyIndex = i;
+                MenuItems.Add(new MenuItem(members[copyIndex], () => Console.WriteLine(members[copyIndex]), $"{copyIndex + 1}", ViewType.Member));
             }
-            return show;
-        }
 
-        private void ShowVerboseList()
-        {
-            System.Console.WriteLine("Listing verbose files");
-        }
-
-        private void ShowCompactList()
-        {
-            System.Console.WriteLine("Listing compact files");
-        }
-
-        public ViewType Run()
-        {
-            ShowMenu();
-            return NextView;
+            MenuItems.Add(new MenuItem("0) Go Back", () => ChooseListType(), "0", ViewType.MemberList));
         }
     }
 }
