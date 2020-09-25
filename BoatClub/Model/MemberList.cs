@@ -22,7 +22,7 @@ namespace Model
                 return JsonConvert.DeserializeObject<List<Member>>(json);
             }
         }
-        private void writeListToRegistry(List<Member> members)
+        private void WriteListToRegistry(List<Member> members)
         {
             var j = JsonConvert.SerializeObject(members, Formatting.Indented);
             File.WriteAllText(_registryPath, j);
