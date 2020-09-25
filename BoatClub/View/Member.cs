@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Model.Menu;
 using Model;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace View
 {
@@ -33,7 +35,7 @@ namespace View
                 int copyIndex = i;
                 MenuItems.Add(new MenuItem(
                     $"{copyIndex + 1})\n{members[copyIndex].ToString(format)}",
-                    () => ShowMember(members[copyIndex]),
+                    () => ShowMember(members[copyIndex], format),
                     $"{copyIndex + 1}",
                     ViewType.Member
                 ));
@@ -42,9 +44,69 @@ namespace View
             MenuItems.Add(new MenuItem("0) Go Back", () => ChooseListType(), "0", ViewType.Member));
         }
 
-        public void ShowMember(Model.Member member)
+        private void UpdateUser(Model.Member member, string format)
+        {
+            MenuItems = new MenuItems($"Change member info\n{member.Name} - {member.ID}");
+
+            MenuItems.Add(new MenuItem($"1) Name: ({member.Name})", () => UpdateName(member, format), "1", ViewType.Member));
+            MenuItems.Add(new MenuItem($"2) PID: ({member.PID})", () => UpdatePID(member, format), "2", ViewType.Member));
+            MenuItems.Add(new MenuItem("0) Go back", () => ShowMember(member, format), "0", ViewType.Member));
+        }
+
+
+        private void UpdateName(Model.Member member, string format)
+        {     
+            SetPromptMessage("Enter name", member.Name);
+            string name;
+            do
+            {
+                name = Console.ReadLine();
+            } while (name.Any(c => !char.IsLetter(c)));
+
+            member.Name = name;
+
+            _memberList.WriteListToRegistry();
+            UpdateUser(member, format);
+        }
+        private void UpdatePID(Model.Member member, string format)
+        {     
+            SetPromptMessage("Enter PID", member.PID.ToString());
+            Regex rgx = new Regex(@"^[0-9]{6}[-]{1}[0-9]{4}$");
+            string PID;
+            do
+            {
+                Console.WriteLine("\nValid format: YYMMDD-XXXX");
+                PID = Console.ReadLine();
+                
+            } while (!rgx.IsMatch(PID));
+            
+            member.PID = new PersonalID(PID);
+
+            _memberList.WriteListToRegistry();
+            UpdateUser(member, format);
+        }
+
+        private void SetPromptMessage(string promptTitle, string currentPropertyValue)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(promptTitle);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write($" ({currentPropertyValue})");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(": ");
+            Console.ResetColor();
+        }
+
+        public void ShowMember(Model.Member member, string format)
         {
             MenuItems = new MenuItems($"Member\n{member.Name} - {member.ID}");
+
+            MenuItems.Add(new MenuItem("1) Change info", () => UpdateUser(member, format), "1", ViewType.Member));
+            MenuItems.Add(new MenuItem("2) Manage boats", () =>{}, "2", ViewType.Boat));
+            MenuItems.Add(new MenuItem("3) Add boat", () =>{}, "3", ViewType.Boat));
+            MenuItems.Add(new MenuItem("4) Delete member", () => _memberList.DeleteMember(member), "4", ViewType.Member));
+            MenuItems.Add(new MenuItem("0) Go back", () => ShowMembers(format), "0", ViewType.Member));
         }
     }
 }

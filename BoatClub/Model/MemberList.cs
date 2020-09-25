@@ -39,14 +39,29 @@ namespace Model
 
             return verboseMembers;
         }
-        private void WriteListToRegistry(List<Member> members)
+        public void WriteListToRegistry(List<Member> members)
         {
             var j = JsonConvert.SerializeObject(members, Formatting.Indented);
             File.WriteAllText(_registryPath, j);
         }
+
+        public void WriteListToRegistry()
+        {
+            var j = JsonConvert.SerializeObject(_members, Formatting.Indented);
+            File.WriteAllText(_registryPath, j);
+        }        
         public void Add(Member member) 
         {
             _members.Add(member);
+        }
+
+
+
+        public void DeleteMember(Member member)
+        {
+            _members.Remove(member);
+
+            WriteListToRegistry(_members);
         }
 
         public override string ToString() => string.Join("\n", _members);
