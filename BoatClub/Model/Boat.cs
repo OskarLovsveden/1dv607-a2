@@ -29,12 +29,14 @@ namespace Model
             get => _id;
             set => _id = value;
         }
-        public Boat(BoatType boatType, int length, string name, string id)
+        public Member Owner { get; set; }
+        public Boat(BoatType boatType, int length, string name, string id, Member owner)
         {
             BoatType = boatType;
             Length = length;
             Name = name;
             ID = id;
+            Owner = owner;
         }
 
         public override string ToString() => $"Boat ID: {ID}\nBoat Name: {Name}\nBoat Type: {BoatType}\n" +
