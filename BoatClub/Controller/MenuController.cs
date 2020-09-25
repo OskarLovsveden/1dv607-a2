@@ -24,6 +24,7 @@ namespace Controller
             Menu.MenuItems = startView.MenuItems;
 
             Member memberView = new Member();
+            Boat boatView = new Boat();
 
             bool shouldContinue = true;
             while (shouldContinue)
@@ -41,9 +42,9 @@ namespace Controller
                     case ViewType.Member:
                         Menu.MenuItems = memberView.MenuItems;
                         break;
-                    case ViewType.BoatList:
-                        break;
                     case ViewType.Boat:
+                        boatView.CurrentMember = memberView.CurrentMember;
+                        Menu.MenuItems = boatView.MenuItems;
                         break;
                     case ViewType.Quit:
                         shouldContinue = false;

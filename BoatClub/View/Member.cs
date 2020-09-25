@@ -12,6 +12,7 @@ namespace View
         private Model.MemberList _memberList = new Model.MemberList();
         public MenuItems MenuItems { get; set; }
 
+        public Model.Member CurrentMember { get; set; }
         public Member()
         {
             ChooseListType();
@@ -103,8 +104,8 @@ namespace View
             MenuItems = new MenuItems($"Member\n{member.Name} - {member.ID}");
 
             MenuItems.Add(new MenuItem("1) Change info", () => UpdateUser(member, format), "1", ViewType.Member));
-            MenuItems.Add(new MenuItem("2) Manage boats", () =>{}, "2", ViewType.Boat));
-            MenuItems.Add(new MenuItem("3) Add boat", () =>{}, "3", ViewType.Boat));
+            MenuItems.Add(new MenuItem("2) Manage boats", () => CurrentMember = member, "2", ViewType.Boat));
+            MenuItems.Add(new MenuItem("3) Add boat", () => CurrentMember = member, "3", ViewType.Boat));
             MenuItems.Add(new MenuItem("4) Delete member", () => _memberList.DeleteMember(member), "4", ViewType.Member));
             MenuItems.Add(new MenuItem("0) Go back", () => ShowMembers(format), "0", ViewType.Member));
         }
