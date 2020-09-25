@@ -68,6 +68,8 @@ namespace View
                 Console.ResetColor();
             }
             Console.WriteLine();
+            Console.ResetColor();
+
         }
 
         private string GetSelectedItem()

@@ -9,6 +9,11 @@ namespace Model
         private List<Member> _members;
         private string _registryPath = "Registry/MemberRegistry/MemberRegistry.json";
 
+        public List<Member> All 
+        {
+            get => _members;
+        }
+
         public MemberList()
         {
             _members = GetMemberList();
@@ -21,6 +26,18 @@ namespace Model
                 string json = r.ReadToEnd();
                 return JsonConvert.DeserializeObject<List<Member>>(json);
             }
+        }
+
+        public List<string> GetVerboseList()
+        {
+            List<Member> members = GetMemberList();
+            List<string> verboseMembers = new List<string>();
+            foreach (Member member in members)
+            {
+                verboseMembers.Add(member.ToString("verbose"));
+            }
+
+            return verboseMembers;
         }
         private void WriteListToRegistry(List<Member> members)
         {
