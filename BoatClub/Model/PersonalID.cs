@@ -13,5 +13,10 @@ namespace Model
         {
             Pid = pid;
         }
+
+        public override string ToString()
+        {
+            return Pid;
+        }
     }
 }

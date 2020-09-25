@@ -3,7 +3,6 @@ public enum ViewType {
     Boat,
     BoatList,
     Member,
-    MemberList,
     Register,
     Quit
 }

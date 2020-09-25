@@ -43,10 +43,10 @@ namespace Model
             switch (format)
             {
                 // “Verbose List”; name, personal number, member id and boats with boat information
-                case "Verbose":
-                    return $"Name: {Name}\nPersonal Identification Number: {PID}\nMember ID: {ID}\nBoats:\n{BoatList.ToString()}";
+                case "verbose":
+                    return $"Name: {Name}\nPersonal Identification Number: {PID}\nMember ID: {ID}\nBoats:\n{BoatList}";
                 // “Compact List”; name, member id and number of boats
-                case "Compact":
+                case "compact":
                     return $"Name: {Name}\nMember ID: {ID}\nNumber of boats: {BoatCount}";
                 case null:
                 case "":
@@ -56,6 +56,6 @@ namespace Model
             }
         }
 
-        public override string ToString() => ToString("Verbose");
+        public override string ToString() => ToString("verbose");
     }
 }
