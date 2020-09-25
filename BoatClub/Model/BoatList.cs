@@ -6,7 +6,7 @@ namespace Model
 {
     public class BoatList
     {
-        private List<Boat> _boats;
+        private List<Boat> _boats = new List<Boat>();
         private string _registryPath = "Registry/BoatRegistry/BoatRegistry.json";
 
         public List<Boat> All 
@@ -43,10 +43,15 @@ namespace Model
 
         //     return verboseMembers;
         // }
-        private void WriteListToRegistry(List<Boat> boats)
+        public void WriteListToRegistry()
         {
-            var j = JsonConvert.SerializeObject(boats, Formatting.Indented);
+            var j = JsonConvert.SerializeObject(_boats, Formatting.Indented);
             File.WriteAllText(_registryPath, j);
+        }
+
+        public List<Boat> GetMembersBoats(Model.Member member)
+        {
+            return _boats.FindAll(boat => boat.Owner == member);
         }
         public void Add(Boat boat) 
         {
