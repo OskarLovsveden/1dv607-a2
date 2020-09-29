@@ -3,11 +3,11 @@
     "Name": "Snubben",
     "ID": "799",
     "PID": {
-      "Pid": "090909-0909"
+      "Pid": "884455-8888"
     },
     "BoatList": {
-      "Count": 0,
-      "Boats": []
+      "All": [],
+      "Count": 0
     },
     "BoatCount": 0
   }

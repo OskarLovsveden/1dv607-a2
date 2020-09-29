@@ -105,8 +105,7 @@ namespace View
 
             MenuItems.Add(new MenuItem("1) Change info", () => UpdateUser(member, format), "1", ViewType.Member));
             MenuItems.Add(new MenuItem("2) Manage boats", () => CurrentMember = member, "2", ViewType.Boat));
-            MenuItems.Add(new MenuItem("3) Add boat", () => CurrentMember = member, "3", ViewType.Boat));
-            MenuItems.Add(new MenuItem("4) Delete member", () => _memberList.DeleteMember(member), "4", ViewType.Member));
+            MenuItems.Add(new MenuItem("3) Delete member", () => _memberList.Delete(member), "3", ViewType.Member));
             MenuItems.Add(new MenuItem("0) Go back", () => ShowMembers(format), "0", ViewType.Member));
         }
     }

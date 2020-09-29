@@ -6,6 +6,7 @@ namespace Model
 {
     public class MemberList
     {
+        private Model.DAL.Registry _registry = new Model.DAL.Registry();
         private List<Member> _members;
         private string _registryPath = "Registry/MemberRegistry/MemberRegistry.json";
 
@@ -21,47 +22,23 @@ namespace Model
         }
         private List<Member> GetMemberList()
         {
-            using (StreamReader r = new StreamReader(_registryPath))
-            {
-                string json = r.ReadToEnd();
-                return JsonConvert.DeserializeObject<List<Member>>(json);
-            }
-        }
-
-        public List<string> GetVerboseList()
-        {
-            List<Member> members = GetMemberList();
-            List<string> verboseMembers = new List<string>();
-            foreach (Member member in members)
-            {
-                verboseMembers.Add(member.ToString("verbose"));
-            }
-
-            return verboseMembers;
-        }
-        public void WriteListToRegistry(List<Member> members)
-        {
-            var j = JsonConvert.SerializeObject(members, Formatting.Indented);
-            File.WriteAllText(_registryPath, j);
+            return _registry.ReadListFromRegistry<Member>(_registryPath);
         }
 
         public void WriteListToRegistry()
         {
-            var j = JsonConvert.SerializeObject(_members, Formatting.Indented);
-            File.WriteAllText(_registryPath, j);
+            _registry.WriteListToRegistry<Member>(_members, _registryPath);
+
         }        
         public void Add(Member member) 
         {
             _members.Add(member);
         }
 
-
-
-        public void DeleteMember(Member member)
+        public void Delete(Member member)
         {
             _members.Remove(member);
-
-            WriteListToRegistry(_members);
+            WriteListToRegistry();
         }
 
         public override string ToString() => string.Join("\n", _members);
