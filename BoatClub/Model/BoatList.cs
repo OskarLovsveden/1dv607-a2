@@ -6,6 +6,8 @@ namespace Model
 {
     public class BoatList
     {
+        private Model.DAL.Registry _registry = new Model.DAL.Registry();
+        private readonly byte FILE_MIN_LENGTH = 2;
         private List<Boat> _boats = new List<Boat>();
         private string _registryPath = "Registry/BoatRegistry/BoatRegistry.json";
 
@@ -25,28 +27,12 @@ namespace Model
         }
         private List<Boat> GetBoatList()
         {
-            using (StreamReader r = new StreamReader(_registryPath))
-            {
-                string json = r.ReadToEnd();
-                return JsonConvert.DeserializeObject<List<Boat>>(json);
-            }
+            return _registry.ReadListFromRegistry<Model.Boat>(_registryPath); 
         }
-
-        // public List<string> GetVerboseList()
-        // {
-        //     List<Boat> boats = GetBoatList();
-        //     List<string> verboseMembers = new List<string>();
-        //     foreach (Boat boat in boats)
-        //     {
-        //         verboseMembers.Add(boats.ToString());
-        //     }
-
-        //     return verboseMembers;
-        // }
+      
         public void WriteListToRegistry()
         {
-            var j = JsonConvert.SerializeObject(_boats, Formatting.Indented);
-            File.WriteAllText(_registryPath, j);
+            _registry.WriteListToRegistry<Boat>(_boats, _registryPath);
         }
 
         public List<Boat> GetMembersBoats(Model.Member member)
@@ -58,6 +44,6 @@ namespace Model
             _boats.Add(boat);
         }
 
-        public override string ToString() => string.Join("\n", _boats);
+        public override string ToString() => _boats.Count < 1 ? "No boats." : string.Join("\n", _boats);
     }
 }

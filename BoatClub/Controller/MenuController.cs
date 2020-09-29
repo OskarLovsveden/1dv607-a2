@@ -43,7 +43,7 @@ namespace Controller
                         Menu.MenuItems = memberView.MenuItems;
                         break;
                     case ViewType.Boat:
-                        boatView.CurrentMember = memberView.CurrentMember;
+                        boatView.Member = memberView.CurrentMember;
                         Menu.MenuItems = boatView.MenuItems;
                         break;
                     case ViewType.Quit:
