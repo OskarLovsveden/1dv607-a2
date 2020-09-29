@@ -6,7 +6,6 @@ namespace View
 {
     public class BoatList
     {
-
         public MenuItems MenuItems { get; set; }
 
         public BoatList()

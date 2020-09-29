@@ -10,7 +10,7 @@ namespace Model
         private List<Member> _members;
         private string _registryPath = "Registry/MemberRegistry/MemberRegistry.json";
 
-        public List<Member> All 
+        public List<Member> All
         {
             get => _members;
         }
@@ -29,8 +29,8 @@ namespace Model
         {
             _registry.WriteListToRegistry<Member>(_members, _registryPath);
 
-        }        
-        public void Add(Member member) 
+        }
+        public void Add(Member member)
         {
             _members.Add(member);
         }

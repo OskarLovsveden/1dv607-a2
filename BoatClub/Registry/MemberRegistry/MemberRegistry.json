@@ -1,14 +1,12 @@
-[
-  {
+[{
     "Name": "Snubben",
     "ID": "799",
     "PID": {
-      "Pid": "884455-8888"
+      "Pid": "090909-0909"
     },
     "BoatList": {
-      "All": [],
-      "Count": 0
+      "Count": 0,
+      "Boats": []
     },
     "BoatCount": 0
-  }
-]
+  }]
