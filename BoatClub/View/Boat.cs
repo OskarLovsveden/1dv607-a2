@@ -22,7 +22,7 @@ namespace View
             MenuItems.Add(new MenuItem("1) List boats", () => ListBoats(), "1", ViewType.Boat));
             MenuItems.Add(new MenuItem("2) Manage boats", () => ManageBoats(), "2", ViewType.Boat));
             MenuItems.Add(new MenuItem("3) Add boat", () => Add(), "3", ViewType.Boat));
-            MenuItems.Add(new MenuItem("0) Go back", () => {}, "0", ViewType.Member));
+            MenuItems.Add(new MenuItem("0) Go back", () => { }, "0", ViewType.Member));
         }
         public void ShowBoats(Model.Member member)
         {
@@ -39,10 +39,10 @@ namespace View
                 ));
             }
 
-            MenuItems.Add(new MenuItem("0) Go Back", () => {}, "0", ViewType.Member));
+            MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Member));
         }
 
-        
+
         private void ListBoats()
         {
             System.Console.WriteLine("List all members boats");
@@ -59,8 +59,9 @@ namespace View
             int length = SetBoatLength();
             BoatType type = SetBoatType();
             Model.Member owner = Member;
-        
-            // Model.Boat newBoat = new Model.Boat(type, length, name, owner);
+
+            Model.Boat newBoat = new Model.Boat(type, length, name, owner);
+            System.Console.WriteLine(newBoat.ToString());
         }
 
         private string SetBoatName()
@@ -71,7 +72,7 @@ namespace View
             {
                 System.Console.WriteLine("Name must be between 1 - 100 characters");
                 name = Console.ReadLine();
-                
+
             } while (name.Length > 100 || name.Length < 1);
 
             return name;
@@ -83,9 +84,9 @@ namespace View
             System.Console.WriteLine("Enter your boats length");
             do
             {
-                System.Console.WriteLine("Length must be between 1 - 50 meters");
+                Console.WriteLine("Length must be between 1 - 50 meters");
                 response = Console.ReadLine();
-                
+
             } while (!Int32.TryParse(response, out length) || length > 100 || length < 1);
 
             return length;
@@ -93,33 +94,31 @@ namespace View
         }
         private BoatType SetBoatType()
         {
-            BoatType type = BoatType.Canoe;
-
-            int count = 0;
             foreach (BoatType boatType in (BoatType[])Enum.GetValues(typeof(BoatType)))
             {
-                count++;
-                System.Console.WriteLine($"{count}) {boatType}");
+                System.Console.WriteLine($"{(int)boatType}) {boatType}");
             }
+
+            string response;
+            int responseInt;
 
             do
             {
+                response = Console.ReadKey(true).KeyChar.ToString();
+            } while (!Int32.TryParse(response, out responseInt) ||
+                    !Enum.IsDefined(typeof(BoatType), (BoatType)responseInt)
+                    );
 
-                int userSelect = Int32.Parse(Console.ReadKey(true).KeyChar.ToString());
-
-                type = (BoatType)userSelect;
-                
-            } while ();            
-            return type;
+            return (BoatType)responseInt;
         }
 
         private void ShowBoat(Model.Boat boat, Model.Member member)
         {
             MenuItems = new MenuItems($"Member\n{boat.Name} - {boat.ID}");
 
-            MenuItems.Add(new MenuItem("1) Update type", () => {}, "1", ViewType.Boat));
-            MenuItems.Add(new MenuItem("2) Update length", () =>{}, "2", ViewType.Boat));
-            MenuItems.Add(new MenuItem("3) Delete boat", () =>{}, "3", ViewType.Boat));
+            MenuItems.Add(new MenuItem("1) Update type", () => { }, "1", ViewType.Boat));
+            MenuItems.Add(new MenuItem("2) Update length", () => { }, "2", ViewType.Boat));
+            MenuItems.Add(new MenuItem("3) Delete boat", () => { }, "3", ViewType.Boat));
             MenuItems.Add(new MenuItem("0) Go back", () => ShowBoats(member), "0", ViewType.Boat));
         }
     }

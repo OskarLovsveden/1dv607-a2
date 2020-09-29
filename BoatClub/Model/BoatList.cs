@@ -11,7 +11,7 @@ namespace Model
         private List<Boat> _boats = new List<Boat>();
         private string _registryPath = "Registry/BoatRegistry/BoatRegistry.json";
 
-        public List<Boat> All 
+        public List<Boat> All
         {
             get => _boats;
         }
@@ -27,9 +27,9 @@ namespace Model
         }
         private List<Boat> GetBoatList()
         {
-            return _registry.ReadListFromRegistry<Model.Boat>(_registryPath); 
+            return _registry.ReadListFromRegistry<Model.Boat>(_registryPath);
         }
-      
+
         public void WriteListToRegistry()
         {
             _registry.WriteListToRegistry<Boat>(_boats, _registryPath);
@@ -39,7 +39,7 @@ namespace Model
         {
             return _boats.FindAll(boat => boat.Owner == member);
         }
-        public void Add(Boat boat) 
+        public void Add(Boat boat)
         {
             _boats.Add(boat);
         }

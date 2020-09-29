@@ -7,10 +7,10 @@ namespace Model.DAL
     class Registry
     {
         private readonly byte FILE_MIN_LENGTH = 2;
-        
+
         public List<T> ReadListFromRegistry<T>(string filePath)
         {
-           using (StreamReader r = new StreamReader(filePath))
+            using (StreamReader r = new StreamReader(filePath))
             {
                 string json = r.ReadToEnd();
                 return JsonConvert.DeserializeObject<List<T>>(json);
@@ -29,7 +29,7 @@ namespace Model.DAL
             if (!File.Exists(filePath) || IsRegistryEmpty(filePath))
             {
                 CreateEmptyBoatList(filePath);
-            } 
+            }
         }
 
         private bool IsRegistryEmpty(string filePath)
@@ -39,7 +39,7 @@ namespace Model.DAL
 
         private void CreateEmptyBoatList(string filePath)
         {
-            File.WriteAllText(filePath, "[]"); 
+            File.WriteAllText(filePath, "[]");
         }
 
     }
