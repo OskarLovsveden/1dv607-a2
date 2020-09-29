@@ -5,7 +5,7 @@ namespace Model
         private BoatType _boatType;
         private int _length;
         private string _name;
-        private string _id;
+        private int _id;
 
         public BoatType BoatType
         {
@@ -24,18 +24,18 @@ namespace Model
             get => _name;
             set => _name = value;
         }
-        public string ID 
+        public int ID 
         {
             get => _id;
             set => _id = value;
         }
         public Member Owner { get; set; }
-        public Boat(BoatType boatType, int length, string name, string id, Member owner)
+        public Boat(BoatType boatType, int length, string name, Member owner)
         {
             BoatType = boatType;
             Length = length;
             Name = name;
-            ID = id;
+            ID = owner.GetHashCode();
             Owner = owner;
         }
 

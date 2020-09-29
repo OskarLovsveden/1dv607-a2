@@ -6,7 +6,7 @@ namespace Model
 {
     public class BoatList
     {
-        private Model.DAL.Registry registry = new Model.DAL.Registry();
+        private Model.DAL.Registry _registry = new Model.DAL.Registry();
         private readonly byte FILE_MIN_LENGTH = 2;
         private List<Boat> _boats = new List<Boat>();
         private string _registryPath = "Registry/BoatRegistry/BoatRegistry.json";
@@ -27,26 +27,12 @@ namespace Model
         }
         private List<Boat> GetBoatList()
         {
-            return registry.ReadDataFromRegistry<Model.Boat>(_registryPath); 
+            return _registry.ReadListFromRegistry<Model.Boat>(_registryPath); 
         }
       
-        // public List<string> GetVerboseList()
-        // {
-        //     List<Boat> boats = GetBoatList();
-        //     List<string> verboseMembers = new List<string>();
-        //     foreach (Boat boat in boats)
-        //     {
-        //         verboseMembers.Add(boats.ToString());
-        //     }
-
-        //     return verboseMembers;
-        // }
-
-        // TODO: move method to Registry-class
         public void WriteListToRegistry()
         {
-            var j = JsonConvert.SerializeObject(_boats, Formatting.Indented);
-            File.WriteAllText(_registryPath, j);
+            _registry.WriteListToRegistry<Boat>(_boats, _registryPath);
         }
 
         public List<Boat> GetMembersBoats(Model.Member member)

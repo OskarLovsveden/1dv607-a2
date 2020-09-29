@@ -8,7 +8,7 @@ namespace Model.DAL
     {
         private readonly byte FILE_MIN_LENGTH = 2;
         
-        public List<T> ReadDataFromRegistry<T>(string filePath)
+        public List<T> ReadListFromRegistry<T>(string filePath)
         {
            using (StreamReader r = new StreamReader(filePath))
             {
@@ -16,6 +16,13 @@ namespace Model.DAL
                 return JsonConvert.DeserializeObject<List<T>>(json);
             }
         }
+
+        public void WriteListToRegistry<T>(List<T> list, string filePath)
+        {
+            var j = JsonConvert.SerializeObject(list, Formatting.Indented);
+            File.WriteAllText(filePath, j);
+        }
+
 
         private void CreateRegistryIfEmptyOrNotExist(string filePath)
         {
