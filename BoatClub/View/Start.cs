@@ -11,9 +11,9 @@ namespace View
         public Start()
         {
             MenuItems = new MenuItems("Choose your own adventure");
-            MenuItems.Add(new MenuItem("1) Register", () => Console.WriteLine("Register"), "1", ViewType.Register));
-            MenuItems.Add(new MenuItem("2) List Members", () => Console.WriteLine("member list"), "2", ViewType.Member));
-            MenuItems.Add(new MenuItem("0) Exit", () => Console.WriteLine("Exit"), "0", ViewType.Quit));
+            MenuItems.Add(new MenuItem("1) Register", () => { }, "1", ViewType.Register));
+            MenuItems.Add(new MenuItem("2) List Members", () => { }, "2", ViewType.Member));
+            MenuItems.Add(new MenuItem("0) Exit", () => { }, "0", ViewType.Quit));
         }
     }
 }
