@@ -1,22 +1,33 @@
+using System;
+using System.Text.RegularExpressions;
+
 namespace Model
 {
     public class PersonalID
     {
         private string _pid;
 
-        public string Pid
+        public string Value
         {
             get => _pid;
-            set => _pid = value; // TODO: implement validation for format yymmdd-xxx
+            set
+            {
+                Regex rgx = new Regex(@"^[0-9]{6}[-]{1}[0-9]{4}$");
+                if (!rgx.IsMatch(value))
+                {
+                    throw new ArgumentException("Personal Identification Number must be this format: YYMMDD-XXXX");
+                }
+                _pid = value;
+            }
         }
         public PersonalID(string pid)
         {
-            Pid = pid;
+            Value = pid;
         }
 
         public override string ToString()
         {
-            return Pid;
+            return Value;
         }
     }
 }
