@@ -30,7 +30,7 @@ namespace View
 
         public void ShowMembers(string format)
         {
-            _memberListFormat = format;   
+            _memberListFormat = format;
             List<Model.Member> members = _memberList.All;
             MenuItems = new MenuItems("Members:");
             for (int i = 0; i < members.Count; i++)
