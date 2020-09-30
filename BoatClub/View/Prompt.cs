@@ -5,7 +5,7 @@ namespace View
 {
     public class Prompt
     {
-        public string PromptQuestion(string title, string conditionDescription, Func<string,bool> conditions)
+        public string PromptQuestion(string title, string conditionDescription, Func<string, bool> conditions)
         {
             string result;
             System.Console.WriteLine(title);
@@ -19,7 +19,7 @@ namespace View
             return result;
         }
 
-        public string PromptSelection(string title, List<string> options, Func<string,bool> conditions)
+        public string PromptSelection(string title, List<string> options, Func<string, bool> conditions)
         {
             string userSelection;
             System.Console.WriteLine(title);
@@ -34,6 +34,18 @@ namespace View
 
 
             return userSelection;
+        }
+
+        public void SetPromptMessage(string promptTitle, string currentPropertyValue)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(promptTitle);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write($" ({currentPropertyValue})");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(": ");
+            Console.ResetColor();
         }
     }
 }
