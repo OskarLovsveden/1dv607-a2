@@ -26,10 +26,9 @@ namespace View
         private void Add()
         {
             string name = SetMemberName();
-            string id = "ID";
             Model.PersonalID pid = SetMemberPid();
 
-            Model.Member newMember = new Model.Member(name, id, pid);
+            Model.Member newMember = new Model.Member(name, pid);
 
             _memberList.Add(newMember);
         }
