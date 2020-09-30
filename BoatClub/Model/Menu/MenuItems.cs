@@ -5,8 +5,8 @@ namespace Model.Menu
 {
     public class MenuItems
     {
-        public List<MenuItem> AllMenuItems { get; set; }
-        public string Title { get; set; }
+        public List<MenuItem> AllMenuItems { get; private set; }
+        public string Title { get; private set; }
 
         public MenuItems(string title)
         {

@@ -1,3 +1,6 @@
+using System;
+
+
 namespace Model
 {
     public class Boat
@@ -5,42 +8,53 @@ namespace Model
         private BoatType _boatType;
         private int _length;
         private string _name;
-        private int _id;
 
         public BoatType BoatType
         {
             get => _boatType;
-            set => _boatType = value;
+            set
+            {
+                if (!Enum.IsDefined(typeof(BoatType), (BoatType)value))
+                {
+                    throw new InvalidOperationException("The provided value is not defined in the enum BoatType");
+                }
+                _boatType = value;
+            }
         }
 
         public int Length
         {
             get => _length;
-            set => _length = value;
-        }
 
+            set
+            {
+                if (value < 1 || value > 20)
+                {
+                    throw new ArgumentOutOfRangeException("Length has to be between 1-20");
+                }
+                _length = value;
+            }
+        }
         public string Name
         {
             get => _name;
-            set => _name = value;
+            set
+            {
+                if (value.Length < 1 || value.Length > 100)
+                {
+                    throw new ArgumentOutOfRangeException("name has to be between 1-100 characters");
+                }
+                _name = value;
+            }
         }
-        public int ID
-        {
-            get => _id;
-            set => _id = value;
-        }
-        public string Owner { get; set; }
-        public Boat(BoatType boatType, int length, string name, string owner)
+
+        public Boat(BoatType boatType, int length, string name)
         {
             BoatType = boatType;
             Length = length;
             Name = name;
-            ID = owner.GetHashCode();
-            Owner = owner;
         }
 
-        // public override string ToString() => $"Boat ID: {ID}\nBoat Name: {Name}\nBoat Type: {BoatType}\n" +
-        //                                      $"Boat Length: {Length}";
-        public override string ToString() => $"ID: {ID}\tName: {Name}\tType: {BoatType}\tLength: {Length}";
+        public override string ToString() => $"Name: {Name}\tType: {BoatType}\tLength: {Length}";
     }
 }
