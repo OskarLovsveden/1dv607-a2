@@ -25,7 +25,7 @@ namespace Model
             return _registry.ReadListFromRegistry<Member>(_registryPath);
         }
 
-        public void WriteListToRegistry()
+        public void UpdateMemberList()
         {
             _registry.WriteListToRegistry<Member>(_members, _registryPath);
 
@@ -33,12 +33,13 @@ namespace Model
         public void Add(Member member)
         {
             _members.Add(member);
+            UpdateMemberList();
         }
 
         public void Delete(Member member)
         {
             _members.Remove(member);
-            WriteListToRegistry();
+            UpdateMemberList();
         }
 
         public override string ToString() => string.Join("\n", _members);

@@ -6,12 +6,13 @@ namespace View
 {
     public class Boat
     {
-        private Model.BoatList _boatList = new Model.BoatList();
         public MenuItems MenuItems { get; set; }
         public Model.Member Member { get; set; }
+        public Model.MemberList _memberList;
 
-        public Boat()
+        public Boat(Model.MemberList memberList)
         {
+            _memberList = memberList;
             SetMainMenuItems();
         }
 
@@ -24,16 +25,17 @@ namespace View
             MenuItems.Add(new MenuItem("3) Add boat", () => Add(), "3", ViewType.Boat));
             MenuItems.Add(new MenuItem("0) Go back", () => { }, "0", ViewType.Member));
         }
-        public void ShowBoats(Model.Member member)
+        public void ShowBoats()
         {
-            List<Model.Boat> boats = _boatList.GetMembersBoats(member);
+            // List<Model.Boat> boats = _boatList.GetMembersBoats(member);
+            Model.BoatList boats = Member.BoatList;
             MenuItems = new MenuItems("Boats:");
             for (int i = 0; i < boats.Count; i++)
             {
                 int copyIndex = i;
                 MenuItems.Add(new MenuItem(
-                    $"{copyIndex + 1})\n{boats[copyIndex].ToString()}",
-                    () => ShowBoat(boats[copyIndex], member),
+                    $"{copyIndex + 1})\n{boats.All[copyIndex].ToString()}",
+                    () => ShowBoat(boats.All[copyIndex]),
                     $"{copyIndex + 1}",
                     ViewType.Boat
                 ));
@@ -42,15 +44,46 @@ namespace View
             MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Member));
         }
 
+        private void ShowBoat(Model.Boat boat)
+        {
+            MenuItems = new MenuItems($"{Member.Name}\n{boat.Name} - {boat.ID}");
+
+            // TODO Make general solution for updating data over multiple classes
+            MenuItems.Add(new MenuItem("1) Update type", () => { }, "1", ViewType.Boat));
+            MenuItems.Add(new MenuItem("2) Update length", () => { }, "2", ViewType.Boat));
+            MenuItems.Add(new MenuItem("3) Delete boat", () => { }, "3", ViewType.Boat));
+            MenuItems.Add(new MenuItem("0) Go back", () => ShowBoats(), "0", ViewType.Boat));
+        }
 
         private void ListBoats()
         {
-            System.Console.WriteLine("List all members boats");
+            Console.Clear();
+            System.Console.WriteLine(Member.Name + " - " + Member.ID + "\n");
+            foreach (Model.Boat boat in Member.BoatList.All)
+            {
+                Console.WriteLine(boat + "\n");
+            }
+            System.Console.WriteLine("Press any key to go back");
+            Console.ReadKey();
         }
 
         private void ManageBoats()
         {
-            System.Console.WriteLine("Manage members boats");
+            MenuItems = new MenuItems("Select boat to manage:");
+            List<Model.Boat> boats = Member.BoatList.All;
+
+            for (int i = 0; i < boats.Count; i++)
+            {
+                int copyIndex = i;
+                MenuItems.Add(new MenuItem(
+                    $"{copyIndex + 1}) {boats[copyIndex].Name}",
+                    () => ShowBoat(boats[copyIndex]),
+                    $"{copyIndex + 1}",
+                    ViewType.Boat
+                ));
+            }
+
+            MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Boat));
         }
 
         private void Add()
@@ -58,10 +91,15 @@ namespace View
             string name = SetBoatName();
             int length = SetBoatLength();
             BoatType type = SetBoatType();
-            Model.Member owner = Member;
+            string owner = Member.Name;
 
             Model.Boat newBoat = new Model.Boat(type, length, name, owner);
-            System.Console.WriteLine(newBoat.ToString());
+            // _boatList.Add(newBoat);
+            Member.BoatList.Add(newBoat);
+
+            System.Console.WriteLine("\n\n" + "Member with new boat: " + Member + "\n\n");
+            _memberList.UpdateMemberList();
+            System.Console.WriteLine("Memberlist in BoatView: " + _memberList + "\n\n");
         }
 
         private string SetBoatName()
@@ -81,6 +119,7 @@ namespace View
         {
             string response;
             int length;
+
             System.Console.WriteLine("Enter your boats length");
             do
             {
@@ -112,14 +151,6 @@ namespace View
             return (BoatType)responseInt;
         }
 
-        private void ShowBoat(Model.Boat boat, Model.Member member)
-        {
-            MenuItems = new MenuItems($"Member\n{boat.Name} - {boat.ID}");
 
-            MenuItems.Add(new MenuItem("1) Update type", () => { }, "1", ViewType.Boat));
-            MenuItems.Add(new MenuItem("2) Update length", () => { }, "2", ViewType.Boat));
-            MenuItems.Add(new MenuItem("3) Delete boat", () => { }, "3", ViewType.Boat));
-            MenuItems.Add(new MenuItem("0) Go back", () => ShowBoats(member), "0", ViewType.Boat));
-        }
     }
 }
