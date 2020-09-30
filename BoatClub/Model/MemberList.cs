@@ -10,7 +10,7 @@ namespace Model
         private List<Member> _members;
         private string _registryPath = "Registry/MemberRegistry/MemberRegistry.json";
 
-        public List<Member> All 
+        public List<Member> All
         {
             get => _members;
         }
@@ -25,20 +25,21 @@ namespace Model
             return _registry.ReadListFromRegistry<Member>(_registryPath);
         }
 
-        public void WriteListToRegistry()
+        public void UpdateMemberList()
         {
             _registry.WriteListToRegistry<Member>(_members, _registryPath);
 
-        }        
-        public void Add(Member member) 
+        }
+        public void Add(Member member)
         {
             _members.Add(member);
+            UpdateMemberList();
         }
 
         public void Delete(Member member)
         {
             _members.Remove(member);
-            WriteListToRegistry();
+            UpdateMemberList();
         }
 
         public override string ToString() => string.Join("\n", _members);

@@ -13,24 +13,24 @@ namespace Model
             set => _boatType = value;
         }
 
-        public int Length 
+        public int Length
         {
             get => _length;
             set => _length = value;
         }
 
-        public string Name 
+        public string Name
         {
             get => _name;
             set => _name = value;
         }
-        public int ID 
+        public int ID
         {
             get => _id;
             set => _id = value;
         }
-        public Member Owner { get; set; }
-        public Boat(BoatType boatType, int length, string name, Member owner)
+        public string Owner { get; set; }
+        public Boat(BoatType boatType, int length, string name, string owner)
         {
             BoatType = boatType;
             Length = length;
@@ -41,5 +41,6 @@ namespace Model
 
         public override string ToString() => $"Boat ID: {ID}\nBoat Name: {Name}\nBoat Type: {BoatType}\n" +
                                              $"Boat Length: {Length}";
+        // public override string ToString() => $"{"Boat ID:" + ID}{"Boat Name:" + Name,20}Boat Type: {BoatType}Boat Length: {Length}";
     }
 }

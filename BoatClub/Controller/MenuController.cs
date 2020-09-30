@@ -23,8 +23,10 @@ namespace Controller
             Start startView = new Start();
             Menu.MenuItems = startView.MenuItems;
 
-            Member memberView = new Member();
-            Boat boatView = new Boat();
+            Model.MemberList MemberList = new Model.MemberList();
+            Member memberView = new Member(MemberList);
+            Boat boatView = new Boat(MemberList);
+            Register registerView = new Register(MemberList);
 
             bool shouldContinue = true;
             while (shouldContinue)
@@ -37,7 +39,7 @@ namespace Controller
                         Menu.MenuItems = startView.MenuItems;
                         break;
                     case ViewType.Register:
-                        System.Console.WriteLine("Register");
+                        Menu.MenuItems = registerView.MenuItems;
                         break;
                     case ViewType.Member:
                         Menu.MenuItems = memberView.MenuItems;

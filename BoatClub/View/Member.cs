@@ -9,12 +9,12 @@ namespace View
 {
     public class Member
     {
-        private Model.MemberList _memberList = new Model.MemberList();
+        private Model.MemberList _memberList;
         public MenuItems MenuItems { get; set; }
-
         public Model.Member CurrentMember { get; set; }
-        public Member()
+        public Member(Model.MemberList memberList)
         {
+            _memberList = memberList;
             ChooseListType();
         }
 
@@ -28,7 +28,7 @@ namespace View
 
         public void ShowMembers(string format)
         {
-            
+
             List<Model.Member> members = _memberList.All;
             MenuItems = new MenuItems("Members:");
             for (int i = 0; i < members.Count; i++)
@@ -45,6 +45,16 @@ namespace View
             MenuItems.Add(new MenuItem("0) Go Back", () => ChooseListType(), "0", ViewType.Member));
         }
 
+        private void ShowMember(Model.Member member, string format)
+        {
+            MenuItems = new MenuItems($"Member\n{member.Name} - {member.ID}");
+
+            MenuItems.Add(new MenuItem("1) Change info", () => UpdateUser(member, format), "1", ViewType.Member));
+            MenuItems.Add(new MenuItem("2) Manage boats", () => CurrentMember = member, "2", ViewType.Boat));
+            MenuItems.Add(new MenuItem("3) Delete member", () => _memberList.Delete(member), "3", ViewType.Member));
+            MenuItems.Add(new MenuItem("0) Go back", () => ShowMembers(format), "0", ViewType.Member));
+        }
+
         private void UpdateUser(Model.Member member, string format)
         {
             MenuItems = new MenuItems($"Change member info\n{member.Name} - {member.ID}");
@@ -56,7 +66,7 @@ namespace View
 
 
         private void UpdateName(Model.Member member, string format)
-        {     
+        {
             SetPromptMessage("Enter name", member.Name);
             string name;
             do
@@ -65,12 +75,12 @@ namespace View
             } while (name.Any(c => !char.IsLetter(c)));
 
             member.Name = name;
+            _memberList.UpdateMemberList();
 
-            _memberList.WriteListToRegistry();
             UpdateUser(member, format);
         }
         private void UpdatePID(Model.Member member, string format)
-        {     
+        {
             SetPromptMessage("Enter PID", member.PID.ToString());
             Regex rgx = new Regex(@"^[0-9]{6}[-]{1}[0-9]{4}$");
             string PID;
@@ -78,12 +88,12 @@ namespace View
             {
                 Console.WriteLine("\nValid format: YYMMDD-XXXX");
                 PID = Console.ReadLine();
-                
+
             } while (!rgx.IsMatch(PID));
-            
+
             member.PID = new PersonalID(PID);
 
-            _memberList.WriteListToRegistry();
+            _memberList.UpdateMemberList();
             UpdateUser(member, format);
         }
 
@@ -97,16 +107,6 @@ namespace View
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(": ");
             Console.ResetColor();
-        }
-
-        public void ShowMember(Model.Member member, string format)
-        {
-            MenuItems = new MenuItems($"Member\n{member.Name} - {member.ID}");
-
-            MenuItems.Add(new MenuItem("1) Change info", () => UpdateUser(member, format), "1", ViewType.Member));
-            MenuItems.Add(new MenuItem("2) Manage boats", () => CurrentMember = member, "2", ViewType.Boat));
-            MenuItems.Add(new MenuItem("3) Delete member", () => _memberList.Delete(member), "3", ViewType.Member));
-            MenuItems.Add(new MenuItem("0) Go back", () => ShowMembers(format), "0", ViewType.Member));
         }
     }
 }
