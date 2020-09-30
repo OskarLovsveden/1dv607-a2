@@ -35,6 +35,11 @@ namespace Model
             _boats.Add(boat);
         }
 
+        public void Delete(Boat boat)
+        {
+            _boats.Remove(boat);
+        }
+
         public override string ToString() => _boats.Count < 1 ? "No boats." : string.Join("\n\n", _boats);
     }
 }
