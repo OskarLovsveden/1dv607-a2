@@ -6,11 +6,11 @@ namespace Model
     {
         private Model.DAL.Registry _registry = new Model.DAL.Registry();
         private List<Member> _members;
-        private string _registryPath = "Registry/MemberRegistry/MemberRegistry.json";
+        private string _registryPath = "Registry/MemberRegistry.json";
 
-        public List<Member> All
+        public IReadOnlyList<Member> All
         {
-            get => _members;
+            get => _members.AsReadOnly();
         }
 
         public MemberList()
