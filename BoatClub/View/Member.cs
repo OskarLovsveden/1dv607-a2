@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Model.Menu;
 using Model;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace View
@@ -10,6 +9,7 @@ namespace View
     public class Member
     {
         private string _memberListFormat;
+        private View.Prompt _prompt = new View.Prompt();
         private Model.MemberList _memberList;
         public MenuItems MenuItems { get; set; }
 
@@ -31,7 +31,7 @@ namespace View
         public void ShowMembers(string format)
         {
             _memberListFormat = format;
-            List<Model.Member> members = _memberList.All;
+            IReadOnlyList<Model.Member> members = _memberList.All;
             MenuItems = new MenuItems("Members:");
             for (int i = 0; i < members.Count; i++)
             {
@@ -84,9 +84,10 @@ namespace View
 
         private void UpdateName(Model.Member member)
         {
-            SetPromptMessage("Enter name", member.Name);
-            Regex rgx = new Regex("^[a-zA-Z]{1,100}$");
+
             string name;
+            _prompt.SetPromptMessage("Enter name", member.Name);
+            Regex rgx = new Regex("^[a-zA-Z]{1,100}$");
 
             do
             {
@@ -102,7 +103,7 @@ namespace View
         }
         private void UpdatePID(Model.Member member)
         {
-            SetPromptMessage("Enter PID", member.PID.ToString());
+            _prompt.SetPromptMessage("Enter PID", member.PID.ToString());
             Regex rgx = new Regex(@"^[0-9]{6}[-]{1}[0-9]{4}$");
             string PID;
             do
@@ -118,16 +119,16 @@ namespace View
             UpdateMemberMenu(member);
         }
 
-        private void SetPromptMessage(string promptTitle, string currentPropertyValue)
-        {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(promptTitle);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write($" ({currentPropertyValue})");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(": ");
-            Console.ResetColor();
-        }
+        // private void SetPromptMessage(string promptTitle, string currentPropertyValue)
+        // {
+        //     Console.Clear();
+        //     Console.ForegroundColor = ConsoleColor.Yellow;
+        //     Console.Write(promptTitle);
+        //     Console.ForegroundColor = ConsoleColor.Green;
+        //     Console.Write($" ({currentPropertyValue})");
+        //     Console.ForegroundColor = ConsoleColor.Yellow;
+        //     Console.Write(": ");
+        //     Console.ResetColor();
+        // }
     }
 }
