@@ -6,28 +6,14 @@ namespace Model
     {
         private List<Boat> _boats = new List<Boat>();
 
-        public List<Boat> All
+        public IReadOnlyList<Boat> All
         {
-            get => _boats;
+            get => _boats.AsReadOnly();
         }
 
         public int Count
         {
             get => _boats.Count;
-        }
-        private List<Boat> GetBoatList()
-        {
-            throw new System.NotImplementedException("GetBoatList");
-        }
-
-        public void UpdateBoatList()
-        {
-            throw new System.NotImplementedException("UpdateBoatList");
-        }
-
-        public List<Boat> GetMembersBoats(Model.Member member)
-        {
-            throw new System.NotImplementedException("GetMembersBoats");
         }
 
         public void Add(Boat boat)
