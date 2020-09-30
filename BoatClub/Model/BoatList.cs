@@ -4,16 +4,25 @@ namespace Model
 {
     public class BoatList
     {
-        private List<Boat> _boats = new List<Boat>();
+        private List<Boat> _boats;
 
-        public IReadOnlyList<Boat> All
+        public List<Boat> All
         {
-            get => _boats.AsReadOnly();
+            get => _boats;
         }
+        // public IReadOnlyList<Boat> All
+        // {
+        //     get => _boats.AsReadOnly();
+        // }
 
         public int Count
         {
             get => _boats.Count;
+        }
+
+        public BoatList()
+        {
+            _boats = new List<Boat>();
         }
 
         public void Add(Boat boat)
@@ -26,6 +35,6 @@ namespace Model
             _boats.Remove(boat);
         }
 
-        public override string ToString() => _boats.Count < 1 ? "No boats." : string.Join("\n\n", _boats);
+        public override string ToString() => _boats.Count < 1 ? "No boats." : string.Join("\n", _boats);
     }
 }

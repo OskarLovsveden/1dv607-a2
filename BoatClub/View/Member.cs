@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Model.Menu;
-using Model;
 using System.Text.RegularExpressions;
 
 namespace View
@@ -60,10 +59,7 @@ namespace View
 
         private void ShowMember(Model.Member member)
         {
-            Console.Clear();
-            System.Console.WriteLine(member);
-            System.Console.WriteLine("Press any key to go back");
-            Console.ReadKey();
+            _prompt.PromptShowTilClick(member.ToString());
         }
 
         private void DeleteMember(Model.Member member)
@@ -85,50 +81,33 @@ namespace View
         private void UpdateName(Model.Member member)
         {
 
-            string name;
             _prompt.SetPromptMessage("Enter name", member.Name);
-            Regex rgx = new Regex("^[a-zA-Z]{1,100}$");
+            member.Name = _prompt.PromptQuestion(
+                    "Name can only contain 1-100 letters",
+                    (string name) =>
+                    {
+                        Regex rgx = new Regex(@"^[a-zA-Z\u00c0-\u017e]{1,100}$");
+                        return !rgx.IsMatch(name);
+                    }
+                );
 
-            do
-            {
-                System.Console.WriteLine("Name can only contain 1-100 letters");
-                name = Console.ReadLine();
-            } while (!rgx.IsMatch(name));
-            // !(minNumber > numberValue && maxNumber < numberValue)
-
-            member.Name = name;
             _memberList.UpdateMemberList();
-
             UpdateMemberMenu(member);
         }
         private void UpdatePID(Model.Member member)
         {
             _prompt.SetPromptMessage("Enter PID", member.PID.ToString());
-            Regex rgx = new Regex(@"^[0-9]{6}[-]{1}[0-9]{4}$");
-            string PID;
-            do
-            {
-                Console.WriteLine("\nValid format: YYMMDD-XXXX");
-                PID = Console.ReadLine();
-
-            } while (!rgx.IsMatch(PID));
-
-            member.PID = new PersonalID(PID);
+            member.PID = _prompt.PromptQuestion(
+                    "Valid format: YYMMDD-XXXX",
+                    (string pid) =>
+                    {
+                        Regex rgx = new Regex(@"^[0-9]{6}[-]{1}[0-9]{4}$");
+                        return !rgx.IsMatch(pid);
+                    }
+                );
 
             _memberList.UpdateMemberList();
             UpdateMemberMenu(member);
         }
-
-        // private void SetPromptMessage(string promptTitle, string currentPropertyValue)
-        // {
-        //     Console.Clear();
-        //     Console.ForegroundColor = ConsoleColor.Yellow;
-        //     Console.Write(promptTitle);
-        //     Console.ForegroundColor = ConsoleColor.Green;
-        //     Console.Write($" ({currentPropertyValue})");
-        //     Console.ForegroundColor = ConsoleColor.Yellow;
-        //     Console.Write(": ");
-        //     Console.ResetColor();
-        // }
     }
 }

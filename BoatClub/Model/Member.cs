@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -8,13 +9,14 @@ namespace Model
     {
         private string _name;
         private ID _ID;
+        private string _PID;
 
         public string Name
         {
             get => _name;
             set
             {
-                Regex rgx = new Regex("^[a-zA-Z]{1,100}$");
+                Regex rgx = new Regex(@"^[a-zA-Z\u00c0-\u017e]{1,100}$");
 
                 if (value.Any(c => !char.IsLetter(c)))
                 {
@@ -31,15 +33,31 @@ namespace Model
         {
             get => _ID.Value;
         }
-        public PersonalID PID { get; set; }
-        public BoatList BoatList { get; private set; }
+
+        public string PID
+        {
+            get => _PID;
+            set
+            {
+                Regex rgx = new Regex(@"^[0-9]{6}[-]{1}[0-9]{4}$");
+                if (!rgx.IsMatch(value))
+                {
+                    throw new ArgumentException("Personal Identification Number must be this format: YYMMDD-XXXX");
+                }
+                _PID = value;
+            }
+        }
+        // public BoatList BoatList { get; private set; }
+        public List<Boat> BoatList { get; private set; }
+        // public int BoatCount { get => BoatList.Count; }
         public int BoatCount { get => BoatList.Count; }
-        public Member(string name, PersonalID pid)
+        public Member(string name, string pid)
         {
             Name = name;
             PID = pid;
             _ID = new ID();
-            BoatList = new BoatList();
+            // BoatList = new BoatList();
+            BoatList = new List<Boat>();
         }
 
         public string ToString(string format)
