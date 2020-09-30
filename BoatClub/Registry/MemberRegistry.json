@@ -1,50 +1,51 @@
 [
   {
-    "Name": "SuperCoolaOskar",
-    "ID": "1wL5GEBrg6Y",
-    "PID": {
-      "Pid": "476789-7654"
-    },
-    "BoatList": {
-      "All": [],
-      "Count": 0
-    },
-    "BoatCount": 0
+    "Name": "viggo",
+    "ID": "5aWFA1Pdlb4",
+    "PID": "123456-1234",
+    "BoatList": [
+      {
+        "BoatType": 1,
+        "Length": 1,
+        "Name": "båtenmin"
+      },
+      {
+        "BoatType": 5,
+        "Length": 6,
+        "Name": "g"
+      }
+    ],
+    "BoatCount": 2
   },
   {
-    "Name": "SALLADAMANNEN",
-    "ID": "IBygNK1fmsr",
-    "PID": {
-      "Pid": "129212-0222"
-    },
-    "BoatList": {
-      "All": [],
-      "Count": 0
-    },
-    "BoatCount": 0
+    "Name": "kalle",
+    "ID": "kgZoduMsq3p",
+    "PID": "456789-1234",
+    "BoatList": [
+      {
+        "BoatType": 3,
+        "Length": 4,
+        "Name": "KALLE"
+      }
+    ],
+    "BoatCount": 1
   },
   {
-    "Name": "pewlle",
-    "ID": "pXlrHCVASt3",
-    "PID": {
-      "Pid": "123412-1234"
-    },
-    "BoatList": {
-      "All": [],
-      "Count": 0
-    },
-    "BoatCount": 0
-  },
-  {
-    "Name": "Karatemannen",
-    "ID": "WFk5fEg3KCo",
-    "PID": {
-      "Pid": "444444-4444"
-    },
-    "BoatList": {
-      "All": [],
-      "Count": 0
-    },
-    "BoatCount": 0
+    "Name": "Ellak",
+    "ID": "yWkiVeHoYhA",
+    "PID": "123456-0987",
+    "BoatList": [
+      {
+        "BoatType": 3,
+        "Length": 10,
+        "Name": "Golden Eye"
+      },
+      {
+        "BoatType": 5,
+        "Length": 4,
+        "Name": "husbåt"
+      }
+    ],
+    "BoatCount": 2
   }
 ]

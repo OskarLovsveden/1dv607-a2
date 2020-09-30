@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Model.Menu;
 
@@ -27,29 +25,29 @@ namespace View
         private void Add()
         {
             string name = SetMemberName();
-            Model.PersonalID pid = SetMemberPid();
+            string PID = SetMemberPid();
 
-            Model.Member newMember = new Model.Member(name, pid);
+            Model.Member newMember = new Model.Member(name, PID);
 
             _memberList.Add(newMember);
         }
 
         private string SetMemberName()
         {
+            _prompt.SetPromptMessage("Enter members name");
             return _prompt.PromptQuestion(
-                    "Enter members name",
                     "Name can only contain 1-100 letters",
                     (string name) =>
                     {
-                        Regex rgx = new Regex("^[a-zA-Z]{1,100}$");
+                        Regex rgx = new Regex(@"^[a-zA-Z\u00c0-\u017e]{1,100}$");
                         return !rgx.IsMatch(name);
                     }
                 );
         }
-        private Model.PersonalID SetMemberPid()
+        private string SetMemberPid()
         {
+            _prompt.SetPromptMessage("Enter members Personal ID");
             string PID = _prompt.PromptQuestion(
-                    "Enter members Personal ID",
                     "Valid format: YYMMDD-XXXX",
                     (string pid) =>
                     {
@@ -58,7 +56,7 @@ namespace View
                     }
                 );
 
-            return new Model.PersonalID(PID);
+            return PID;
         }
     }
 }

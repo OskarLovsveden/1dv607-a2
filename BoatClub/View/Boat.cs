@@ -32,7 +32,9 @@ namespace View
         private void ManageBoats()
         {
             MenuItems = new MenuItems("Select boat to manage:");
-            IReadOnlyList<Model.Boat> boats = Member.BoatList.All;
+            // List<Model.Boat> boats = Member.BoatList.All;
+            List<Model.Boat> boats = Member.BoatList;
+            // IReadOnlyList<Model.Boat> boats = Member.BoatList.All;
 
             for (int i = 0; i < boats.Count; i++)
             {
@@ -52,7 +54,6 @@ namespace View
         {
             MenuItems = new MenuItems($"{Member.Name}\n{boat}");
 
-            // TODO Make general solution for updating data over multiple classes
             MenuItems.Add(new MenuItem("1) Update name", () => UpdateBoatName(boat), "1", ViewType.Boat));
             MenuItems.Add(new MenuItem("2) Update type", () => UpdateBoatType(boat), "2", ViewType.Boat));
             MenuItems.Add(new MenuItem("3) Update length", () => UpdateBoatLength(boat), "3", ViewType.Boat));
@@ -62,14 +63,8 @@ namespace View
 
         private void ShowBoatsAsList()
         {
-            Console.Clear();
-            System.Console.WriteLine(Member.Name + " - " + Member.ID + "\n");
-            foreach (Model.Boat boat in Member.BoatList.All)
-            {
-                Console.WriteLine(boat + "\n");
-            }
-            System.Console.WriteLine("Press any key to go back");
-            Console.ReadKey();
+            _prompt.SetPromptMessage(Member.Name + " - " + Member.ID + "\n");
+            _prompt.PromptShowTilClick(Member.BoatList.ToString());
         }
 
 
@@ -89,42 +84,42 @@ namespace View
 
         private void UpdateBoatName(Model.Boat boat)
         {
-            boat.Name = AddBoatName($"Change your boat name ({boat.Name}): ");
+            boat.Name = AddBoatName("Change your boat name", boat.Name);
             _memberList.UpdateMemberList();
             ManageBoat(boat);
         }
         private void UpdateBoatLength(Model.Boat boat)
         {
-            boat.Length = AddBoatLength($"Change your boat length ({boat.Length}): ");
+            boat.Length = AddBoatLength("Change your boat length", boat.Length.ToString());
             _memberList.UpdateMemberList();
             ManageBoat(boat);
         }
         private void UpdateBoatType(Model.Boat boat)
         {
-            /* string boatType = Enum.GetName(typeof(BoatType), (int)boat.BoatType); */
-            boat.BoatType = AddBoatType($"Change your boat type ({boat.BoatType}): ");
+            boat.BoatType = AddBoatType("Change your boat type", boat.BoatType.ToString());
             _memberList.UpdateMemberList();
             ManageBoat(boat);
         }
         private void DeleteBoat(Model.Boat boat)
         {
-            Member.BoatList.Delete(boat);
+            // Member.BoatList.Delete(boat);
+            Member.BoatList.Remove(boat);
             _memberList.UpdateMemberList();
             ManageBoats();
         }
 
-        private string AddBoatName(string title)
+        private string AddBoatName(string title, string currentName = "")
         {
+            _prompt.SetPromptMessage(title, currentName);
             return _prompt.PromptQuestion(
-                title,
                 "Name must be between 1 - 100 characters",
                 (string name) => (name.Length > 100 || name.Length < 1)
             );
         }
-        private int AddBoatLength(string title)
+        private int AddBoatLength(string title, string currentLength = "")
         {
+            _prompt.SetPromptMessage(title);
             string result = _prompt.PromptQuestion(
-                title,
                 "Length must be between 1 - 20 meters",
                 (string response) =>
                 {
@@ -140,7 +135,7 @@ namespace View
             );
             return Int32.Parse(result);
         }
-        private BoatType AddBoatType(string title)
+        private BoatType AddBoatType(string title, string currentBoatType = "")
         {
             List<string> options = new List<string>();
             foreach (BoatType boatType in (BoatType[])Enum.GetValues(typeof(BoatType)))
@@ -148,8 +143,8 @@ namespace View
                 options.Add($"{(int)boatType}) {boatType}");
             }
 
+            _prompt.SetPromptMessage(title);
             string result = _prompt.PromptSelection(
-                title,
                 options,
                 (string response) =>
                 {
