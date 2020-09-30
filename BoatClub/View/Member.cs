@@ -85,11 +85,15 @@ namespace View
         private void UpdateName(Model.Member member)
         {
             SetPromptMessage("Enter name", member.Name);
+            Regex rgx = new Regex("^[a-zA-Z]{1,100}$");
             string name;
+
             do
             {
+                System.Console.WriteLine("Name can only contain 1-100 letters");
                 name = Console.ReadLine();
-            } while (name.Any(c => !char.IsLetter(c)));
+            } while (!rgx.IsMatch(name));
+            // !(minNumber > numberValue && maxNumber < numberValue)
 
             member.Name = name;
             _memberList.UpdateMemberList();

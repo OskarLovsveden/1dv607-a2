@@ -6,56 +6,48 @@ namespace Controller
     {
         private Menu _menu;
 
-        public Menu Menu
-        {
-            get => _menu;
-            set => _menu = value;
-        }
-
         public MenuController(Menu menu)
         {
-            Menu = menu;
-            Menu.ViewType = ViewType.Start;
+            _menu = menu;
+            _menu.ViewType = ViewType.Start;
         }
 
         public void CheckMenuStateSetView()
         {
-            Start startView = new Start();
-            Menu.MenuItems = startView.MenuItems;
-
             Model.MemberList MemberList = new Model.MemberList();
+            Start startView = new Start();
             Member memberView = new Member(MemberList);
             Boat boatView = new Boat(MemberList);
             Register registerView = new Register(MemberList);
 
+            _menu.MenuItems = startView.MenuItems;
             bool shouldContinue = true;
             while (shouldContinue)
             {
-                System.Console.WriteLine("while");
-                Menu.Start();
-                switch (Menu.ViewType)
+                _menu.Start();
+                switch (_menu.ViewType)
                 {
                     case ViewType.Start:
-                        Menu.MenuItems = startView.MenuItems;
+                        _menu.MenuItems = startView.MenuItems;
                         break;
                     case ViewType.Register:
-                        Menu.MenuItems = registerView.MenuItems;
+                        _menu.MenuItems = registerView.MenuItems;
                         break;
                     case ViewType.Member:
-                        Menu.MenuItems = memberView.MenuItems;
+                        _menu.MenuItems = memberView.MenuItems;
                         break;
                     case ViewType.Boat:
                         boatView.Member = memberView.CurrentMember;
-                        Menu.MenuItems = boatView.MenuItems;
+                        _menu.MenuItems = boatView.MenuItems;
                         break;
                     case ViewType.Quit:
                         shouldContinue = false;
-                        Menu.ShowMenu = false;
+                        _menu.ShowMenu = false;
                         return;
                     default:
                         break;
                 }
-                Menu.ShowMenu = true;
+                _menu.ShowMenu = true;
             }
         }
     }

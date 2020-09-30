@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Model
 {
@@ -12,7 +14,20 @@ namespace Model
         public string Name
         {
             get => _name;
-            set => _name = value;
+            set
+            {
+                Regex rgx = new Regex("^[a-zA-Z]{1,100}$");
+
+                if (value.Any(c => !char.IsLetter(c)))
+                {
+                    throw new ArgumentException("A members name can only contain characters.");
+                }
+                if (!rgx.IsMatch(value))
+                {
+                    throw new ArgumentOutOfRangeException("A members name must be between 1-100 characters.");
+                }
+                _name = value;
+            }
         }
         public string ID
         {

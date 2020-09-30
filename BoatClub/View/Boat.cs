@@ -32,7 +32,7 @@ namespace View
         private void ManageBoats()
         {
             MenuItems = new MenuItems("Select boat to manage:");
-            List<Model.Boat> boats = Member.BoatList.All;
+            IReadOnlyList<Model.Boat> boats = Member.BoatList.All;
 
             for (int i = 0; i < boats.Count; i++)
             {
@@ -78,10 +78,8 @@ namespace View
             string name = AddBoatName("Enter your boat name");
             int length = AddBoatLength("Enter your boats length");
             BoatType type = AddBoatType("Choose type of boat");
-            string owner = Member.Name;
 
-            Model.Boat newBoat = new Model.Boat(type, length, name, owner);
-            // _boatList.Add(newBoat);
+            Model.Boat newBoat = new Model.Boat(type, length, name);
             Member.BoatList.Add(newBoat);
 
             System.Console.WriteLine("\n\n" + "Member with new boat: " + Member + "\n\n");
@@ -119,7 +117,7 @@ namespace View
         {
             return _prompt.PromptQuestion(
                 title,
-                "Name must be between 1 - 100 characters", 
+                "Name must be between 1 - 100 characters",
                 (string name) => (name.Length > 100 || name.Length < 1)
             );
         }
@@ -127,8 +125,8 @@ namespace View
         {
             string result = _prompt.PromptQuestion(
                 title,
-                "Length must be between 1 - 20 meters", 
-                (string response) => 
+                "Length must be between 1 - 20 meters",
+                (string response) =>
                 {
                     int length;
 
@@ -153,7 +151,7 @@ namespace View
             string result = _prompt.PromptSelection(
                 title,
                 options,
-                (string response) => 
+                (string response) =>
                 {
                     int responseInt;
                     return !Int32.TryParse(response, out responseInt) || !Enum.IsDefined(typeof(BoatType), (BoatType)responseInt);
