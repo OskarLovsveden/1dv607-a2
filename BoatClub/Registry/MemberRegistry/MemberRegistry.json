@@ -1,52 +1,18 @@
 [
   {
-    "Name": "Snubben",
-    "ID": "799",
+    "Name": "SuperCoolaOskar",
+    "ID": "xAXcnil7qSB",
     "PID": {
-      "Pid": "884455-8888"
+      "Pid": "476789-7654"
     },
     "BoatList": {
       "All": [
-        {
-          "BoatType": 4,
-          "Length": 10,
-          "Name": "123",
-          "ID": -2104644248,
-          "Owner": "Snubben"
-        },
         {
           "BoatType": 5,
-          "Length": 1,
-          "Name": "LIIIITEN båt",
-          "ID": -483624542,
-          "Owner": "Snubben"
-        },
-        {
-          "BoatType": 3,
-          "Length": 5,
-          "Name": "båtenskain",
-          "ID": -1958059500,
-          "Owner": "Snubben"
-        }
-      ],
-      "Count": 3
-    },
-    "BoatCount": 3
-  },
-  {
-    "Name": "Oskar",
-    "ID": "ID",
-    "PID": {
-      "Pid": "940828-1234"
-    },
-    "BoatList": {
-      "All": [
-        {
-          "BoatType": 1,
-          "Length": 5,
-          "Name": "BananBåten Giffel",
-          "ID": -913458399,
-          "Owner": "Oskar"
+          "Length": 11,
+          "Name": "0) Go back",
+          "ID": 887602900,
+          "Owner": "SuperCoolaOskar"
         }
       ],
       "Count": 1
