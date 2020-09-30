@@ -32,25 +32,5 @@
       "Count": 3
     },
     "BoatCount": 3
-  },
-  {
-    "Name": "Oskar",
-    "ID": "ID",
-    "PID": {
-      "Pid": "940828-1234"
-    },
-    "BoatList": {
-      "All": [
-        {
-          "BoatType": 1,
-          "Length": 5,
-          "Name": "BananBåten Giffel",
-          "ID": -913458399,
-          "Owner": "Oskar"
-        }
-      ],
-      "Count": 1
-    },
-    "BoatCount": 1
   }
 ]

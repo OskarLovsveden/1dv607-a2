@@ -39,8 +39,8 @@ namespace Model
             Owner = owner;
         }
 
-        public override string ToString() => $"Boat ID: {ID}\nBoat Name: {Name}\nBoat Type: {BoatType}\n" +
-                                             $"Boat Length: {Length}";
-        // public override string ToString() => $"{"Boat ID:" + ID}{"Boat Name:" + Name,20}Boat Type: {BoatType}Boat Length: {Length}";
+        // public override string ToString() => $"Boat ID: {ID}\nBoat Name: {Name}\nBoat Type: {BoatType}\n" +
+        //                                      $"Boat Length: {Length}";
+        public override string ToString() => $"ID: {ID}\tName: {Name}\tType: {BoatType}\tLength: {Length}";
     }
 }

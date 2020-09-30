@@ -20,51 +20,10 @@ namespace View
         {
             MenuItems = new MenuItems("Manage your boats");
 
-            MenuItems.Add(new MenuItem("1) List boats", () => ListBoats(), "1", ViewType.Boat));
+            MenuItems.Add(new MenuItem("1) List boats", () => ShowBoatsAsList(), "1", ViewType.Boat));
             MenuItems.Add(new MenuItem("2) Manage boats", () => ManageBoats(), "2", ViewType.Boat));
             MenuItems.Add(new MenuItem("3) Add boat", () => Add(), "3", ViewType.Boat));
             MenuItems.Add(new MenuItem("0) Go back", () => { }, "0", ViewType.Member));
-        }
-        public void ShowBoats()
-        {
-            // List<Model.Boat> boats = _boatList.GetMembersBoats(member);
-            Model.BoatList boats = Member.BoatList;
-            MenuItems = new MenuItems("Boats:");
-            for (int i = 0; i < boats.Count; i++)
-            {
-                int copyIndex = i;
-                MenuItems.Add(new MenuItem(
-                    $"{copyIndex + 1})\n{boats.All[copyIndex].ToString()}",
-                    () => ShowBoat(boats.All[copyIndex]),
-                    $"{copyIndex + 1}",
-                    ViewType.Boat
-                ));
-            }
-
-            MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Member));
-        }
-
-        private void ShowBoat(Model.Boat boat)
-        {
-            MenuItems = new MenuItems($"{Member.Name}\n{boat.Name} - {boat.ID}");
-
-            // TODO Make general solution for updating data over multiple classes
-            MenuItems.Add(new MenuItem("1) Update type", () => { }, "1", ViewType.Boat));
-            MenuItems.Add(new MenuItem("2) Update length", () => { }, "2", ViewType.Boat));
-            MenuItems.Add(new MenuItem("3) Delete boat", () => { }, "3", ViewType.Boat));
-            MenuItems.Add(new MenuItem("0) Go back", () => ShowBoats(), "0", ViewType.Boat));
-        }
-
-        private void ListBoats()
-        {
-            Console.Clear();
-            System.Console.WriteLine(Member.Name + " - " + Member.ID + "\n");
-            foreach (Model.Boat boat in Member.BoatList.All)
-            {
-                Console.WriteLine(boat + "\n");
-            }
-            System.Console.WriteLine("Press any key to go back");
-            Console.ReadKey();
         }
 
         private void ManageBoats()
@@ -77,14 +36,38 @@ namespace View
                 int copyIndex = i;
                 MenuItems.Add(new MenuItem(
                     $"{copyIndex + 1}) {boats[copyIndex].Name}",
-                    () => ShowBoat(boats[copyIndex]),
+                    () => ManageBoat(boats[copyIndex]),
                     $"{copyIndex + 1}",
                     ViewType.Boat
                 ));
             }
 
-            MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Boat));
+            MenuItems.Add(new MenuItem("0) Go Back", () => SetMainMenuItems(), "0", ViewType.Boat));
         }
+
+        private void ManageBoat(Model.Boat boat)
+        {
+            MenuItems = new MenuItems($"{Member.Name}\n{boat.Name} - {boat.ID}");
+
+            // TODO Make general solution for updating data over multiple classes
+            MenuItems.Add(new MenuItem("1) Update type", () => { }, "1", ViewType.Boat));
+            MenuItems.Add(new MenuItem("2) Update length", () => { }, "2", ViewType.Boat));
+            MenuItems.Add(new MenuItem("3) Delete boat", () => { }, "3", ViewType.Boat));
+            MenuItems.Add(new MenuItem("0) Go back", () => ManageBoats(), "0", ViewType.Boat));
+        }
+
+        private void ShowBoatsAsList()
+        {
+            Console.Clear();
+            System.Console.WriteLine(Member.Name + " - " + Member.ID + "\n");
+            foreach (Model.Boat boat in Member.BoatList.All)
+            {
+                Console.WriteLine(boat + "\n");
+            }
+            System.Console.WriteLine("Press any key to go back");
+            Console.ReadKey();
+        }
+
 
         private void Add()
         {
