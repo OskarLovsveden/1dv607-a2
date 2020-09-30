@@ -1,50 +1,22 @@
 [
   {
-    "Name": "Snubben",
-    "ID": "799",
+    "Name": "SuperCoolaOskar",
+    "ID": "xAXcnil7qSB",
     "PID": {
-      "Pid": "090909-0909"
+      "Pid": "476789-7654"
     },
     "BoatList": {
       "All": [
         {
           "BoatType": 5,
-          "Length": 1,
-          "Name": "LIIIITEN båt",
-          "ID": -483624542,
-          "Owner": "Snubben"
-        },
-        {
-          "BoatType": 3,
-          "Length": 5,
-          "Name": "båtenskain",
-          "ID": -1958059500,
-          "Owner": "Snubben"
-        },
-        {
-          "BoatType": 5,
-          "Length": 1,
-          "Name": "inteGlassBåten",
-          "ID": -1627828594,
-          "Owner": "Snubben"
-        },
-        {
-          "BoatType": 2,
-          "Length": 46,
-          "Name": "hundbåt",
-          "ID": -2293585,
-          "Owner": "Snubben"
-        },
-        {
-          "BoatType": 1,
-          "Length": 12,
-          "Name": "4",
-          "ID": -104025234,
-          "Owner": "Snubben"
+          "Length": 11,
+          "Name": "0) Go back",
+          "ID": 887602900,
+          "Owner": "SuperCoolaOskar"
         }
       ],
-      "Count": 5
+      "Count": 1
     },
-    "BoatCount": 5
+    "BoatCount": 1
   }
 ]

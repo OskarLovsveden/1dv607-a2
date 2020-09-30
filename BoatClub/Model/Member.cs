@@ -5,16 +5,9 @@ namespace Model
     public class Member
     {
         private string _name;
-        private string _ID;
+        private Model.ID _ID;
         private PersonalID _PID;
         private BoatList _boatList = new BoatList();
-
-        public Member(string name, string id, PersonalID pid)
-        {
-            Name = name;
-            ID = id;
-            PID = pid;
-        }
 
         public string Name
         {
@@ -23,8 +16,7 @@ namespace Model
         }
         public string ID
         {
-            get => _ID;
-            set => _ID = value;
+            get => _ID.Value;
         }
         public PersonalID PID
         {
@@ -37,6 +29,12 @@ namespace Model
             set => _boatList = value;
         }
         public int BoatCount { get => BoatList.Count; }
+        public Member(string name, PersonalID pid)
+        {
+            Name = name;
+            PID = pid;
+            _ID = new Model.ID();
+        }
 
         public string ToString(string format)
         {
