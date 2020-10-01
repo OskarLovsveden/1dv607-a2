@@ -60,9 +60,8 @@ namespace View
         private void ShowBoatsAsList()
         {
             _prompt.SetPromptMessage(Member.Name + " - " + Member.ID + "\n");
-            _prompt.PromptShowTilClick(Member.BoatList.ToString());
+            _prompt.PromptShowTilClick(Member.BoatListToString());
         }
-
 
         private void Add()
         {
