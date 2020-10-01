@@ -15,15 +15,21 @@ namespace View
         public Member(Model.MemberList memberList)
         {
             _memberList = memberList;
-            ChooseListType();
+            StartMenu();
         }
-
+        public void StartMenu()
+        {
+            MenuItems = new MenuItems("Choose your own adventure");
+            MenuItems.Add(new MenuItem("1) Register", () => { }, "1", ViewType.Register));
+            MenuItems.Add(new MenuItem("2) List Members", () => ChooseListType(), "2", ViewType.Member));
+            MenuItems.Add(new MenuItem("0) Exit", () => { }, "0", ViewType.Quit));
+        }
         public void ChooseListType()
         {
             MenuItems = new MenuItems("Choose type of list:");
             MenuItems.Add(new MenuItem("1) Verbose", () => ShowMembers("verbose"), "1", ViewType.Member));
             MenuItems.Add(new MenuItem("2) Compact", () => ShowMembers("compact"), "2", ViewType.Member));
-            MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Start));
+            MenuItems.Add(new MenuItem("0) Go Back", () => StartMenu(), "0", ViewType.Member));
         }
 
         public void ShowMembers(string format)

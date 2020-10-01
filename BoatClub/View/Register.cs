@@ -19,7 +19,7 @@ namespace View
         {
             MenuItems = new MenuItems("Register");
             MenuItems.Add(new MenuItem("1) New Member", () => Add(), "1", ViewType.Register));
-            MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Start));
+            MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Member));
         }
 
         private void Add()

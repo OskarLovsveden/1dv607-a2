@@ -9,32 +9,28 @@ namespace Controller
         public MenuController(Menu menu)
         {
             _menu = menu;
-            _menu.ViewType = ViewType.Start;
+            _menu.ViewType = ViewType.Member;
         }
 
         public void CheckMenuStateSetView()
         {
             Model.MemberList MemberList = new Model.MemberList();
-            Start startView = new Start();
             Member memberView = new Member(MemberList);
             Boat boatView = new Boat(MemberList);
             Register registerView = new Register(MemberList);
 
-            _menu.MenuItems = startView.MenuItems;
+            _menu.MenuItems = memberView.MenuItems;
             bool shouldContinue = true;
             while (shouldContinue)
             {
                 _menu.Start();
                 switch (_menu.ViewType)
                 {
-                    case ViewType.Start:
-                        _menu.MenuItems = startView.MenuItems;
+                    case ViewType.Member:
+                        _menu.MenuItems = memberView.MenuItems;
                         break;
                     case ViewType.Register:
                         _menu.MenuItems = registerView.MenuItems;
-                        break;
-                    case ViewType.Member:
-                        _menu.MenuItems = memberView.MenuItems;
                         break;
                     case ViewType.Boat:
                         boatView.Member = memberView.CurrentMember;
