@@ -11,8 +11,6 @@ namespace View
         public Model.Member Member { get; set; }
         public Model.MemberList _memberList;
 
-
-
         public Boat(Model.MemberList memberList)
         {
             _memberList = memberList;
@@ -32,9 +30,7 @@ namespace View
         private void ManageBoats()
         {
             MenuItems = new MenuItems("Select boat to manage:");
-            // List<Model.Boat> boats = Member.BoatList.All;
             List<Model.Boat> boats = Member.BoatList;
-            // IReadOnlyList<Model.Boat> boats = Member.BoatList.All;
 
             for (int i = 0; i < boats.Count; i++)
             {
@@ -102,7 +98,6 @@ namespace View
         }
         private void DeleteBoat(Model.Boat boat)
         {
-            // Member.BoatList.Delete(boat);
             Member.BoatList.Remove(boat);
             _memberList.UpdateMemberList();
             ManageBoats();
@@ -155,7 +150,5 @@ namespace View
 
             return (BoatType)Int32.Parse(result);
         }
-
-
     }
 }

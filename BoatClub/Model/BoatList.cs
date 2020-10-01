@@ -10,10 +10,6 @@ namespace Model
         {
             get => _boats;
         }
-        // public IReadOnlyList<Boat> All
-        // {
-        //     get => _boats.AsReadOnly();
-        // }
 
         public int Count
         {
