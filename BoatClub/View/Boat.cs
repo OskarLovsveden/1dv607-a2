@@ -19,10 +19,10 @@ namespace View
 
         public void SetMainMenuItems()
         {
-            MenuItems = new MenuItems("Manage your boats");
+            MenuItems = new MenuItems($"Manage boats");
 
             MenuItems.Add(new MenuItem("1) List boats", () => ShowBoatsAsList(), "1", ViewType.Boat));
-            MenuItems.Add(new MenuItem("2) Manage boats", () => ManageBoats(), "2", ViewType.Boat));
+            MenuItems.Add(new MenuItem("2) Update boat information", () => ManageBoats(), "2", ViewType.Boat));
             MenuItems.Add(new MenuItem("3) Add boat", () => Add(), "3", ViewType.Boat));
             MenuItems.Add(new MenuItem("0) Go back", () => { }, "0", ViewType.Member));
         }
@@ -65,8 +65,8 @@ namespace View
 
         private void Add()
         {
-            string name = AddBoatName("Enter your boat name");
-            int length = AddBoatLength("Enter your boats length");
+            string name = AddBoatName("Enter boat name");
+            int length = AddBoatLength("Enter boat length");
             BoatType type = AddBoatType("Choose type of boat");
 
             Model.Boat newBoat = new Model.Boat(type, length, name);
@@ -79,19 +79,19 @@ namespace View
 
         private void UpdateBoatName(Model.Boat boat)
         {
-            boat.Name = AddBoatName("Change your boat name", boat.Name);
+            boat.Name = AddBoatName("Change boat name", boat.Name);
             _memberList.UpdateMemberList();
             ManageBoat(boat);
         }
         private void UpdateBoatLength(Model.Boat boat)
         {
-            boat.Length = AddBoatLength("Change your boat length", boat.Length.ToString());
+            boat.Length = AddBoatLength("Change boat length", boat.Length.ToString());
             _memberList.UpdateMemberList();
             ManageBoat(boat);
         }
         private void UpdateBoatType(Model.Boat boat)
         {
-            boat.BoatType = AddBoatType("Change your boat type", boat.BoatType.ToString());
+            boat.BoatType = AddBoatType("Change boat type", boat.BoatType.ToString());
             _memberList.UpdateMemberList();
             ManageBoat(boat);
         }

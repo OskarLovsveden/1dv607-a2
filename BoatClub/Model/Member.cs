@@ -61,7 +61,7 @@ namespace Model
 
         public string BoatListToString()
         {
-            return string.Join("\n", BoatList);
+            return BoatList.Count == 0 ? "Member has no boats yet." : string.Join("\n", BoatList);
         }
 
         public string ToString(string format)
