@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Model.Menu;
 
-namespace View
+namespace View.Pages
 {
     public class Register
     {

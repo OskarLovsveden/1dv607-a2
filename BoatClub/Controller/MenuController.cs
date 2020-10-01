@@ -1,4 +1,5 @@
 using View;
+using View.Pages;
 
 namespace Controller
 {
