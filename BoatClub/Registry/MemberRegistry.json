@@ -1,7 +1,7 @@
 [
   {
     "Name": "viggo",
-    "ID": "vmU0WIEiPzk",
+    "ID": "ipSf5bmPXca",
     "PID": "123456-1234",
     "BoatList": [
       {
@@ -19,7 +19,7 @@
   },
   {
     "Name": "kalle",
-    "ID": "U3tsqLTQzlk",
+    "ID": "Z7Vnf9Gp2kB",
     "PID": "456789-1234",
     "BoatList": [
       {
@@ -32,7 +32,7 @@
   },
   {
     "Name": "Ellak",
-    "ID": "z6QP4e2lJI0",
+    "ID": "Dudf2qHS14b",
     "PID": "123456-0987",
     "BoatList": [
       {
@@ -50,7 +50,7 @@
   },
   {
     "Name": "Klas",
-    "ID": "4Q8CKop3fF6",
+    "ID": "yD7knjVf6He",
     "PID": "910924-2637",
     "BoatList": [
       {
@@ -68,15 +68,9 @@
   },
   {
     "Name": "HankTheSuperTank",
-    "ID": "Y0tJcQRop6L",
+    "ID": "4KfwX8YmLrk",
     "PID": "887755-8877",
-    "BoatList": [
-      {
-        "BoatType": 2,
-        "Length": 5,
-        "Name": "Petter"
-      }
-    ],
-    "BoatCount": 1
+    "BoatList": [],
+    "BoatCount": 0
   }
 ]

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Model.Menu;
 
-namespace View
+namespace View.Pages
 {
     public class Boat
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Model.Menu;
 using System.Text.RegularExpressions;
 
-namespace View
+namespace View.Pages
 {
     public class Member
     {
