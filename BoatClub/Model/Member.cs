@@ -59,13 +59,18 @@ namespace Model
             BoatList = new List<Boat>();
         }
 
+        public string BoatListToString()
+        {
+            return string.Join("\n", BoatList);
+        }
+
         public string ToString(string format)
         {
             switch (format)
             {
                 // “Verbose List”; name, personal number, member id and boats with boat information
                 case "verbose":
-                    return $"\nName: {Name}\nPersonal Identification Number: {PID}\nMember ID: {ID}\nBoats:\n{string.Join("\n", BoatList)}\n";
+                    return $"\nName: {Name}\nPersonal Identification Number: {PID}\nMember ID: {ID}\nBoats:\n{BoatListToString()}\n";
                 // “Compact List”; name, member id and number of boats
                 case "compact":
                     return $" Name: {Name}\tMember ID: {ID}\tNumber of boats: {BoatCount}";
