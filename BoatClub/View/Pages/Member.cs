@@ -19,7 +19,7 @@ namespace View.Pages
         }
         public void StartMenu()
         {
-            MenuItems = new MenuItems("Choose your own adventure");
+            MenuItems = new MenuItems("BoatClub\nWhat would you like to do?");
             MenuItems.Add(new MenuItem("1) Register", () => { }, "1", ViewType.Register));
             MenuItems.Add(new MenuItem("2) List Members", () => ChooseListType(), "2", ViewType.Member));
             MenuItems.Add(new MenuItem("0) Exit", () => { }, "0", ViewType.Quit));
@@ -36,7 +36,7 @@ namespace View.Pages
         {
             _memberListFormat = format;
             IReadOnlyList<Model.Member> members = _memberList.All;
-            MenuItems = new MenuItems("Members:");
+            MenuItems = new MenuItems("Select member to manage by entering the corresponding number.");
             for (int i = 0; i < members.Count; i++)
             {
                 int copyIndex = i;
