@@ -1,4 +1,3 @@
-using System;
 using Model.Menu;
 
 namespace View

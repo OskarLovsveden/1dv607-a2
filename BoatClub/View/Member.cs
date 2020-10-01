@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Model.Menu;
 using System.Text.RegularExpressions;
@@ -36,7 +35,7 @@ namespace View
             {
                 int copyIndex = i;
                 MenuItems.Add(new MenuItem(
-                    $"{copyIndex + 1})\n{members[copyIndex].ToString(_memberListFormat)}",
+                    $"{copyIndex + 1}){members[copyIndex].ToString(_memberListFormat)}",
                     () => ManageMember(members[copyIndex]),
                     $"{copyIndex + 1}",
                     ViewType.Member

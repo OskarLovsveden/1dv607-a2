@@ -47,16 +47,15 @@ namespace Model
                 _PID = value;
             }
         }
-        // public BoatList BoatList { get; private set; }
+
         public List<Boat> BoatList { get; private set; }
-        // public int BoatCount { get => BoatList.Count; }
+
         public int BoatCount { get => BoatList.Count; }
         public Member(string name, string pid)
         {
             Name = name;
             PID = pid;
             _ID = new ID();
-            // BoatList = new BoatList();
             BoatList = new List<Boat>();
         }
 
@@ -66,10 +65,10 @@ namespace Model
             {
                 // “Verbose List”; name, personal number, member id and boats with boat information
                 case "verbose":
-                    return $"Name: {Name}\nPersonal Identification Number: {PID}\nMember ID: {ID}\nBoats:\n{BoatList}";
+                    return $"\nName: {Name}\nPersonal Identification Number: {PID}\nMember ID: {ID}\nBoats:\n{string.Join("\n", BoatList)}\n";
                 // “Compact List”; name, member id and number of boats
                 case "compact":
-                    return $"Name: {Name}\nMember ID: {ID}\nNumber of boats: {BoatCount}";
+                    return $" Name: {Name}\tMember ID: {ID}\tNumber of boats: {BoatCount}";
                 case null:
                 case "":
                     throw new FormatException("Could not format the text representation.");
