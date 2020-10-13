@@ -40,6 +40,5 @@ namespace Model
             UpdateMemberList();
         }
 
-        public override string ToString() => string.Join("\n", _members);
     }
 }

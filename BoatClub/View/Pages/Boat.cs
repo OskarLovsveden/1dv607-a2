@@ -60,7 +60,7 @@ namespace View.Pages
         private void ShowBoatsAsList()
         {
             _prompt.SetPromptMessage(Member.Name + " - " + Member.ID + "\n");
-            _prompt.PromptShowTilClick(Member.BoatListToString());
+            _prompt.PromptShowTilClick(BoatListToString(Member.BoatList));
         }
 
         private void Add()
@@ -148,6 +148,20 @@ namespace View.Pages
             );
 
             return (BoatType)Int32.Parse(result);
+        }
+
+        private string BoatListToString(List<Model.Boat> boatList)
+        {
+            string boats = "";
+
+            if (boatList.Count == 0) return "Member has no boats yet";
+
+            foreach (Model.Boat boat in boatList)
+            {
+                boats += $"Name: {boat.Name}, Type: {boat.BoatType}, Length: {boat.Length}\n";
+            }
+
+            return boats;
         }
     }
 }

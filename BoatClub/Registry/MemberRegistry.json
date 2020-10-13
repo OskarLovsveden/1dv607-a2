@@ -1,7 +1,7 @@
 [
   {
     "Name": "viggo",
-    "ID": "2vJxlM0T5sX",
+    "ID": "3jg9eiOH",
     "PID": "123456-1234",
     "BoatList": [
       {
@@ -19,7 +19,7 @@
   },
   {
     "Name": "kalle",
-    "ID": "xtWY5bRGOKd",
+    "ID": "FzDuw5TU",
     "PID": "456789-1234",
     "BoatList": [
       {
@@ -29,55 +29,5 @@
       }
     ],
     "BoatCount": 1
-  },
-  {
-    "Name": "Ellak",
-    "ID": "aGcpg1NXwlP",
-    "PID": "123456-0987",
-    "BoatList": [
-      {
-        "BoatType": 3,
-        "Length": 10,
-        "Name": "Golden Eye"
-      },
-      {
-        "BoatType": 5,
-        "Length": 4,
-        "Name": "husbåt"
-      }
-    ],
-    "BoatCount": 2
-  },
-  {
-    "Name": "Klas",
-    "ID": "uKmT52bD3on",
-    "PID": "910924-2637",
-    "BoatList": [
-      {
-        "BoatType": 3,
-        "Length": 8,
-        "Name": "Boatmcboatface"
-      },
-      {
-        "BoatType": 5,
-        "Length": 4,
-        "Name": "gösta ekaman"
-      }
-    ],
-    "BoatCount": 2
-  },
-  {
-    "Name": "HankTheSuperTank",
-    "ID": "CAPdLW5QrXG",
-    "PID": "887755-8877",
-    "BoatList": [],
-    "BoatCount": 0
-  },
-  {
-    "Name": "Ottar",
-    "ID": "E5nofIC07QT",
-    "PID": "444444-4444",
-    "BoatList": [],
-    "BoatCount": 0
   }
 ]
