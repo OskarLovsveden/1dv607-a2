@@ -36,7 +36,7 @@ namespace View.Pages
         {
             _memberListFormat = format;
             IReadOnlyList<Model.Member> members = _memberList.All;
-            MenuItems = new MenuItems("Select member to manage by entering the corresponding number.");
+            MenuItems = new MenuItems("\n\nSelect member to manage by entering the corresponding number.\n\n");
             for (int i = 0; i < members.Count; i++)
             {
                 int copyIndex = i;

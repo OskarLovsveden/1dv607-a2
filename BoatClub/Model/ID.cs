@@ -6,13 +6,13 @@ namespace Model
 {
     public class ID
     {
-        public string Value {private set; get;}
+        public string Value { private set; get; }
         public ID()
         {
             Value = GenerateID();
         }
 
-        private string GenerateID() 
+        private string GenerateID()
         {
             // https://stackoverflow.com/questions/11313205/generate-a-unique-id
             StringBuilder builder = new StringBuilder();
@@ -22,10 +22,10 @@ namespace Model
             .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
             .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
             .OrderBy(e => Guid.NewGuid())
-            .Take(11)
+            .Take(8)
             .ToList().ForEach(e => builder.Append(e));
 
-            return builder.ToString();   
+            return builder.ToString();
         }
     }
 }
