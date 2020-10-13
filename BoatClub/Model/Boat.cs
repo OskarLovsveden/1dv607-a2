@@ -55,6 +55,6 @@ namespace Model
             Name = name;
         }
 
-        public override string ToString() => $"Name: {Name}\tType: {BoatType}\tLength: {Length}";
+        // public override string ToString() => $"Name: {Name}\tType: {BoatType}\tLength: {Length}";
     }
 }

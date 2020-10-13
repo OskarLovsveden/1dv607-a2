@@ -59,29 +59,5 @@ namespace Model
             BoatList = new List<Boat>();
         }
 
-        public string BoatListToString()
-        {
-            return BoatList.Count == 0 ? "Member has no boats yet." : string.Join("\n", BoatList);
-        }
-
-        public string ToString(string format)
-        {
-            switch (format)
-            {
-                // “Verbose List”; name, personal number, member id and boats with boat information
-                case "verbose":
-                    return $"\nName: {Name}\nPersonal Identification Number: {PID}\nMember ID: {ID}\nBoats:\n{BoatListToString()}\n";
-                // “Compact List”; name, member id and number of boats
-                case "compact":
-                    return $" Name: {Name}\tMember ID: {ID}\tNumber of boats: {BoatCount}";
-                case null:
-                case "":
-                    throw new FormatException("Could not format the text representation.");
-                default:
-                    throw new FormatException("Could not format the text representation.");
-            }
-        }
-
-        public override string ToString() => ToString("verbose");
     }
 }

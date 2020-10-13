@@ -41,7 +41,7 @@ namespace View.Pages
             {
                 int copyIndex = i;
                 MenuItems.Add(new MenuItem(
-                    $"{copyIndex + 1}){members[copyIndex].ToString(_memberListFormat)}",
+                    $"{copyIndex + 1}){MemberToString(members[copyIndex], _memberListFormat)}",
                     () => ManageMember(members[copyIndex]),
                     $"{copyIndex + 1}",
                     ViewType.Member
@@ -64,7 +64,7 @@ namespace View.Pages
 
         private void ShowMember(Model.Member member)
         {
-            _prompt.PromptShowTilClick(member.ToString());
+            _prompt.PromptShowTilClick(VerboseMember(member));
         }
 
         private void DeleteMember(Model.Member member)
@@ -113,6 +113,44 @@ namespace View.Pages
 
             _memberList.UpdateMemberList();
             UpdateMemberMenu(member);
+        }
+        private string MemberToString(Model.Member member, string format)
+        {
+            switch (format)
+            {
+                case "verbose":
+                    return VerboseMember(member);
+                    break;
+
+                default:
+                    return CompactMember(member);
+            }
+
+        }
+
+
+        private string VerboseMember(Model.Member member)
+        {
+            return $"\nName: {member.Name}\nPersonal Identification Number: {member.PID}\nMember ID: {member.ID}\nBoats:\n{BoatListToString(member)}\n";
+
+        }
+
+        private string CompactMember(Model.Member member)
+        {
+            return $" Name: {member.Name}\tMember ID: {member.ID}\tNumber of boats: {member.BoatCount}";
+        }
+        private string BoatListToString(Model.Member member)
+        {
+            string boats = "";
+
+            if (member.BoatCount == 0) return "Member has no boats yet";
+
+            foreach (Model.Boat boat in member.BoatList)
+            {
+                boats += $"Name: {boat.Name}, Type: {boat.BoatType}, Length: {boat.Length}\n";
+            }
+
+            return boats;
         }
     }
 }
