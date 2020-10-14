@@ -8,7 +8,13 @@ namespace View
         private ViewType _viewType;
         private bool _showMenu = true;
 
-        public MenuCollection MenuCollection { get; set; }
+        private MenuCollection _menuCollection;
+
+        public MenuCollection MenuCollection
+        {
+            get => _menuCollection;
+            set => _menuCollection = value;
+        }
 
         public bool ShowMenu
         {

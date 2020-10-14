@@ -6,11 +6,12 @@ namespace Model
 {
     public class ID
     {
-        public string Value { private set; get; }
+        private string _value;
+        public string Value { get => _value; }
 
         public ID()
         {
-            Value = GenerateID();
+            _value = GenerateID();
         }
 
         private string GenerateID()

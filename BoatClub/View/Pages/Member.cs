@@ -7,11 +7,13 @@ namespace View.Pages
     public class Member
     {
         private string _memberListFormat;
+        private Model.Member _member;
+        private MenuCollection _menuCollection;
         private View.Prompt _prompt = new View.Prompt();
         private Model.MemberList _memberList;
-        public MenuCollection MenuCollection { get; set; }
+        public MenuCollection MenuCollection { get => _menuCollection; }
 
-        public Model.Member CurrentMember { get; set; }
+        public Model.Member CurrentMember { get => _member; }
         public Member(Model.MemberList memberList)
         {
             _memberList = memberList;
@@ -19,10 +21,12 @@ namespace View.Pages
         }
         public void StartMenu()
         {
-            MenuCollection = new MenuCollection("BoatClub\nWhat would you like to do?");
-            MenuCollection.Add(new MenuItem($"{MenuCollection.CurrentActionKey}) Register", () => { }, MenuCollection.CurrentActionKey, ViewType.Register));
-            MenuCollection.Add(new MenuItem($"{MenuCollection.CurrentActionKey}) List Members", () => ChooseListType(), MenuCollection.CurrentActionKey, ViewType.Member));
-            MenuCollection.AddExitMenuItem(() => { }, ViewType.Quit);
+            MenuCollection mc = new MenuCollection("BoatClub\nWhat would you like to do?");
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Register", () => { }, mc.CurrentActionKey, ViewType.Register));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) List Members", () => ChooseListType(), mc.CurrentActionKey, ViewType.Member));
+            mc.AddExitMenuItem(() => { }, ViewType.Quit);
+
+            _menuCollection = mc;
         }
         public void ChooseListType()
         {
@@ -31,7 +35,7 @@ namespace View.Pages
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) Compact", () => ShowMembers("compact"), mc.CurrentActionKey, ViewType.Member));
             mc.AddGoBackMenuItem(() => StartMenu(), ViewType.Member);
 
-            MenuCollection = mc;
+            _menuCollection = mc;
         }
 
         public void ShowMembers(string format)
@@ -54,7 +58,7 @@ namespace View.Pages
 
             mc.AddGoBackMenuItem(() => ChooseListType(), ViewType.Member);
 
-            MenuCollection = mc;
+            _menuCollection = mc;
         }
 
         private void ManageMember(Model.Member member)
@@ -63,12 +67,12 @@ namespace View.Pages
 
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) Show member info", () => ShowMember(member), mc.CurrentActionKey, ViewType.Member));
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) Change info", () => UpdateMemberMenu(member), mc.CurrentActionKey, ViewType.Member));
-            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Manage boats", () => CurrentMember = member, mc.CurrentActionKey, ViewType.Boat));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Manage boats", () => _member = member, mc.CurrentActionKey, ViewType.Boat));
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) Delete member", () => DeleteMember(member), mc.CurrentActionKey, ViewType.Member));
 
             mc.AddGoBackMenuItem(() => ShowMembers(_memberListFormat), ViewType.Member);
 
-            MenuCollection = mc;
+            _menuCollection = mc;
         }
 
         private void ShowMember(Model.Member member)
@@ -90,7 +94,7 @@ namespace View.Pages
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) PID: ({member.PID})", () => UpdatePID(member), mc.CurrentActionKey, ViewType.Member));
             mc.AddGoBackMenuItem(() => ManageMember(member), ViewType.Member);
 
-            MenuCollection = mc;
+            _menuCollection = mc;
         }
 
 

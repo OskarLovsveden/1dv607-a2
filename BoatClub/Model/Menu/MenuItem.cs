@@ -4,17 +4,22 @@ namespace Model.Menu
 {
     public class MenuItem
     {
-        public string Title { get; private set; }
-        public Action Action { get; private set; }
-        public string ActionKey { get; private set; }
-        public ViewType ViewType { get; private set; }
+        private string _title;
+        private Action _action;
+        private string _actionKey;
+        private ViewType _viewType;
+
+        public string Title { get => _title; }
+        public Action Action { get => _action; }
+        public string ActionKey { get => _actionKey; }
+        public ViewType ViewType { get => _viewType; }
 
         public MenuItem(string title, Action action, string actionKey, ViewType viewType)
         {
-            Title = title;
-            Action = action;
-            ActionKey = actionKey;
-            ViewType = viewType;
+            _title = title;
+            _action = action;
+            _actionKey = actionKey;
+            _viewType = viewType;
         }
     }
 }
