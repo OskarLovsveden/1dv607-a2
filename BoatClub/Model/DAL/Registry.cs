@@ -26,7 +26,6 @@ namespace Model.DAL
             File.WriteAllText(filePath, j);
         }
 
-
         private void CreateRegistryIfEmptyOrNotExist(string filePath)
         {
             if (!File.Exists(filePath) || IsRegistryEmpty(filePath))

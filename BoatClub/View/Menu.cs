@@ -55,7 +55,7 @@ namespace View
             Console.WriteLine(MenuCollection.Title);
             foreach (MenuItem item in MenuCollection.AllMenuCollection)
             {
-                if (item.ActionKey == "0")
+                if (item.ActionKey == MenuCollection.ExitCode)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                 }

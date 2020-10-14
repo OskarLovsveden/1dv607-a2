@@ -1,33 +1,13 @@
 [
   {
-    "Name": "viggo",
-    "ID": "3jg9eiOH",
+    "MinNameLength": 1,
+    "MaxNameLength": 40,
+    "ValidNameFormat": "^[a-zA-Z\\u00c0-\\u017e]{1,40}$",
+    "ValidPIDFormat": "^[0-9]{6}[-]{1}[0-9]{4}$",
+    "Name": "Oskar",
+    "ID": "7F82lwZN",
     "PID": "123456-1234",
-    "BoatList": [
-      {
-        "BoatType": 1,
-        "Length": 1,
-        "Name": "båtenmin"
-      },
-      {
-        "BoatType": 5,
-        "Length": 6,
-        "Name": "g"
-      }
-    ],
-    "BoatCount": 2
-  },
-  {
-    "Name": "kalle",
-    "ID": "FzDuw5TU",
-    "PID": "456789-1234",
-    "BoatList": [
-      {
-        "BoatType": 3,
-        "Length": 4,
-        "Name": "KALLE"
-      }
-    ],
-    "BoatCount": 1
+    "BoatList": [],
+    "BoatCount": 0
   }
 ]

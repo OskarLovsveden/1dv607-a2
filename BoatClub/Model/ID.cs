@@ -7,6 +7,7 @@ namespace Model
     public class ID
     {
         public string Value { private set; get; }
+
         public ID()
         {
             Value = GenerateID();

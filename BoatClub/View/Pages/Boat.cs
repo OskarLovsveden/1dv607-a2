@@ -19,42 +19,48 @@ namespace View.Pages
 
         public void SetMainMenuCollection()
         {
-            MenuCollection = new MenuCollection($"Manage boats");
+            MenuCollection mc = new MenuCollection($"Manage boats");
 
-            MenuCollection.Add(new MenuItem("1) List boats", () => ShowBoatsAsList(), "1", ViewType.Boat));
-            MenuCollection.Add(new MenuItem("2) Update boat information", () => ManageBoats(), "2", ViewType.Boat));
-            MenuCollection.Add(new MenuItem("3) Add boat", () => Add(), "3", ViewType.Boat));
-            MenuCollection.Add(new MenuItem("0) Go back", () => { }, "0", ViewType.Member));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) List boats", () => ShowBoatsAsList(), mc.CurrentActionKey, ViewType.Boat));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Update boat information", () => ManageBoats(), mc.CurrentActionKey, ViewType.Boat));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Add boat", () => Add(), mc.CurrentActionKey, ViewType.Boat));
+            mc.AddGoBackMenuItem(() => { }, ViewType.Member);
+
+            MenuCollection = mc;
         }
 
         private void ManageBoats()
         {
-            MenuCollection = new MenuCollection("Select boat to manage:");
+            MenuCollection mc = new MenuCollection("Select boat to manage:");
             List<Model.Boat> boats = Member.BoatList;
 
             for (int i = 0; i < boats.Count; i++)
             {
                 int copyIndex = i;
-                MenuCollection.Add(new MenuItem(
-                    $"{copyIndex + 1}) {boats[copyIndex].Name}",
+                mc.Add(new MenuItem(
+                    $"{mc.CurrentActionKey}) {boats[copyIndex].Name}",
                     () => ManageBoat(boats[copyIndex]),
-                    $"{copyIndex + 1}",
+                    mc.CurrentActionKey,
                     ViewType.Boat
                 ));
             }
 
-            MenuCollection.Add(new MenuItem("0) Go Back", () => SetMainMenuCollection(), "0", ViewType.Boat));
+            mc.AddGoBackMenuItem(() => SetMainMenuCollection(), ViewType.Boat);
+
+            MenuCollection = mc;
         }
 
         private void ManageBoat(Model.Boat boat)
         {
-            MenuCollection = new MenuCollection($"{Member.Name}\n{boat}");
+            MenuCollection mc = new MenuCollection($"{Member.Name}\n{boat}");
 
-            MenuCollection.Add(new MenuItem("1) Update name", () => UpdateBoatName(boat), "1", ViewType.Boat));
-            MenuCollection.Add(new MenuItem("2) Update type", () => UpdateBoatType(boat), "2", ViewType.Boat));
-            MenuCollection.Add(new MenuItem("3) Update length", () => UpdateBoatLength(boat), "3", ViewType.Boat));
-            MenuCollection.Add(new MenuItem("4) Delete boat", () => DeleteBoat(boat), "4", ViewType.Boat));
-            MenuCollection.Add(new MenuItem("0) Go back", () => ManageBoats(), "0", ViewType.Boat));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Update name", () => UpdateBoatName(boat), mc.CurrentActionKey, ViewType.Boat));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Update type", () => UpdateBoatType(boat), mc.CurrentActionKey, ViewType.Boat));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Update length", () => UpdateBoatLength(boat), mc.CurrentActionKey, ViewType.Boat));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Delete boat", () => DeleteBoat(boat), mc.CurrentActionKey, ViewType.Boat));
+            mc.AddGoBackMenuItem(() => ManageBoats(), ViewType.Boat);
+
+            MenuCollection = mc;
         }
 
         private void ShowBoatsAsList()
@@ -106,14 +112,17 @@ namespace View.Pages
         {
             _prompt.SetPromptMessage(title, currentName);
             return _prompt.PromptQuestion(
-                "Name must be between 1 - 100 characters",
-                (string name) => (name.Length > 100 || name.Length < 1)
+                // TODO Remove string dependency and magic numbers
+                "Name must be between 1 - 40 characters",
+                (string name) => (name.Length > 40 || name.Length < 1)
             );
         }
+
         private int AddBoatLength(string title, string currentLength = "")
         {
             _prompt.SetPromptMessage(title);
             string result = _prompt.PromptQuestion(
+                // TODO Remove string dependency
                 "Length must be between 1 - 20 meters",
                 (string response) =>
                 {
@@ -121,6 +130,7 @@ namespace View.Pages
 
                     if (Int32.TryParse(response, out length))
                     {
+                        // TODO Remove magic numbers
                         return (length < 1 || length > 20);
                     }
 
