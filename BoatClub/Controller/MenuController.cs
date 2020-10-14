@@ -20,7 +20,7 @@ namespace Controller
             Boat boatView = new Boat(MemberList);
             Register registerView = new Register(MemberList);
 
-            _menu.MenuItems = memberView.MenuItems;
+            _menu.MenuCollection = memberView.MenuCollection;
             bool shouldContinue = true;
             while (shouldContinue)
             {
@@ -28,14 +28,14 @@ namespace Controller
                 switch (_menu.ViewType)
                 {
                     case ViewType.Member:
-                        _menu.MenuItems = memberView.MenuItems;
+                        _menu.MenuCollection = memberView.MenuCollection;
                         break;
                     case ViewType.Register:
-                        _menu.MenuItems = registerView.MenuItems;
+                        _menu.MenuCollection = registerView.MenuCollection;
                         break;
                     case ViewType.Boat:
                         boatView.Member = memberView.CurrentMember;
-                        _menu.MenuItems = boatView.MenuItems;
+                        _menu.MenuCollection = boatView.MenuCollection;
                         break;
                     case ViewType.Quit:
                         shouldContinue = false;

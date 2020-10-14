@@ -7,35 +7,35 @@ namespace View.Pages
     public class Boat
     {
         private Prompt _prompt = new Prompt();
-        public MenuItems MenuItems { get; set; }
+        public MenuCollection MenuCollection { get; set; }
         public Model.Member Member { get; set; }
         public Model.MemberList _memberList;
 
         public Boat(Model.MemberList memberList)
         {
             _memberList = memberList;
-            SetMainMenuItems();
+            SetMainMenuCollection();
         }
 
-        public void SetMainMenuItems()
+        public void SetMainMenuCollection()
         {
-            MenuItems = new MenuItems($"Manage boats");
+            MenuCollection = new MenuCollection($"Manage boats");
 
-            MenuItems.Add(new MenuItem("1) List boats", () => ShowBoatsAsList(), "1", ViewType.Boat));
-            MenuItems.Add(new MenuItem("2) Update boat information", () => ManageBoats(), "2", ViewType.Boat));
-            MenuItems.Add(new MenuItem("3) Add boat", () => Add(), "3", ViewType.Boat));
-            MenuItems.Add(new MenuItem("0) Go back", () => { }, "0", ViewType.Member));
+            MenuCollection.Add(new MenuItem("1) List boats", () => ShowBoatsAsList(), "1", ViewType.Boat));
+            MenuCollection.Add(new MenuItem("2) Update boat information", () => ManageBoats(), "2", ViewType.Boat));
+            MenuCollection.Add(new MenuItem("3) Add boat", () => Add(), "3", ViewType.Boat));
+            MenuCollection.Add(new MenuItem("0) Go back", () => { }, "0", ViewType.Member));
         }
 
         private void ManageBoats()
         {
-            MenuItems = new MenuItems("Select boat to manage:");
+            MenuCollection = new MenuCollection("Select boat to manage:");
             List<Model.Boat> boats = Member.BoatList;
 
             for (int i = 0; i < boats.Count; i++)
             {
                 int copyIndex = i;
-                MenuItems.Add(new MenuItem(
+                MenuCollection.Add(new MenuItem(
                     $"{copyIndex + 1}) {boats[copyIndex].Name}",
                     () => ManageBoat(boats[copyIndex]),
                     $"{copyIndex + 1}",
@@ -43,18 +43,18 @@ namespace View.Pages
                 ));
             }
 
-            MenuItems.Add(new MenuItem("0) Go Back", () => SetMainMenuItems(), "0", ViewType.Boat));
+            MenuCollection.Add(new MenuItem("0) Go Back", () => SetMainMenuCollection(), "0", ViewType.Boat));
         }
 
         private void ManageBoat(Model.Boat boat)
         {
-            MenuItems = new MenuItems($"{Member.Name}\n{boat}");
+            MenuCollection = new MenuCollection($"{Member.Name}\n{boat}");
 
-            MenuItems.Add(new MenuItem("1) Update name", () => UpdateBoatName(boat), "1", ViewType.Boat));
-            MenuItems.Add(new MenuItem("2) Update type", () => UpdateBoatType(boat), "2", ViewType.Boat));
-            MenuItems.Add(new MenuItem("3) Update length", () => UpdateBoatLength(boat), "3", ViewType.Boat));
-            MenuItems.Add(new MenuItem("4) Delete boat", () => DeleteBoat(boat), "4", ViewType.Boat));
-            MenuItems.Add(new MenuItem("0) Go back", () => ManageBoats(), "0", ViewType.Boat));
+            MenuCollection.Add(new MenuItem("1) Update name", () => UpdateBoatName(boat), "1", ViewType.Boat));
+            MenuCollection.Add(new MenuItem("2) Update type", () => UpdateBoatType(boat), "2", ViewType.Boat));
+            MenuCollection.Add(new MenuItem("3) Update length", () => UpdateBoatLength(boat), "3", ViewType.Boat));
+            MenuCollection.Add(new MenuItem("4) Delete boat", () => DeleteBoat(boat), "4", ViewType.Boat));
+            MenuCollection.Add(new MenuItem("0) Go back", () => ManageBoats(), "0", ViewType.Boat));
         }
 
         private void ShowBoatsAsList()
