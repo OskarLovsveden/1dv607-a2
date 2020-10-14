@@ -8,7 +8,7 @@ namespace View
         private ViewType _viewType;
         private bool _showMenu = true;
 
-        public MenuItems MenuItems { get; set; }
+        public MenuCollection MenuCollection { get; set; }
 
         public bool ShowMenu
         {
@@ -26,9 +26,9 @@ namespace View
         {
             while (ShowMenu)
             {
-                PrintMenuItems();
+                PrintMenuCollection();
                 string selectedMenuItem = GetSelectedItem();
-                if (MenuItems.Exists(selectedMenuItem))
+                if (MenuCollection.Exists(selectedMenuItem))
                 {
                     DoItemAction(selectedMenuItem);
                     ShowMenu = !ShowMenu;
@@ -41,19 +41,19 @@ namespace View
         }
         private void DoItemAction(string selectedItem)
         {
-            MenuItem m = MenuItems.Find(selectedItem);
+            MenuItem m = MenuCollection.Find(selectedItem);
             Action action = m.Action;
             action();
             ViewType = m.ViewType;
         }
 
-        private void PrintMenuItems()
+        private void PrintMenuCollection()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
 
-            Console.WriteLine(MenuItems.Title);
-            foreach (MenuItem item in MenuItems.AllMenuItems)
+            Console.WriteLine(MenuCollection.Title);
+            foreach (MenuItem item in MenuCollection.AllMenuCollection)
             {
                 if (item.ActionKey == "0")
                 {

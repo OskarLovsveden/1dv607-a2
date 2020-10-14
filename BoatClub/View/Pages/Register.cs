@@ -8,7 +8,7 @@ namespace View.Pages
         private Model.MemberList _memberList;
         private View.Prompt _prompt = new View.Prompt();
 
-        public MenuItems MenuItems { get; set; }
+        public MenuCollection MenuCollection { get; set; }
         public Register(Model.MemberList memberList)
         {
             _memberList = memberList;
@@ -17,9 +17,9 @@ namespace View.Pages
 
         public void SetMainMenu()
         {
-            MenuItems = new MenuItems("Register");
-            MenuItems.Add(new MenuItem("1) New Member", () => Add(), "1", ViewType.Register));
-            MenuItems.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Member));
+            MenuCollection = new MenuCollection("Register");
+            MenuCollection.Add(new MenuItem("1) New Member", () => Add(), "1", ViewType.Register));
+            MenuCollection.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Member));
         }
 
         private void Add()
