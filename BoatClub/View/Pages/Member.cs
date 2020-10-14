@@ -120,8 +120,6 @@ namespace View.Pages
             {
                 case "verbose":
                     return VerboseMember(member);
-                    break;
-
                 default:
                     return CompactMember(member);
             }
