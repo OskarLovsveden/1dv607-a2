@@ -20,46 +20,55 @@ namespace View.Pages
         public void StartMenu()
         {
             MenuCollection = new MenuCollection("BoatClub\nWhat would you like to do?");
-            MenuCollection.Add(new MenuItem("1) Register", () => { }, "1", ViewType.Register));
-            MenuCollection.Add(new MenuItem("2) List Members", () => ChooseListType(), "2", ViewType.Member));
-            MenuCollection.Add(new MenuItem("0) Exit", () => { }, "0", ViewType.Quit));
+            MenuCollection.Add(new MenuItem($"{MenuCollection.CurrentActionKey}) Register", () => { }, MenuCollection.CurrentActionKey, ViewType.Register));
+            MenuCollection.Add(new MenuItem($"{MenuCollection.CurrentActionKey}) List Members", () => ChooseListType(), MenuCollection.CurrentActionKey, ViewType.Member));
+            MenuCollection.AddExitMenuItem(() => { }, ViewType.Quit);
         }
         public void ChooseListType()
         {
-            MenuCollection = new MenuCollection("Choose type of list:");
-            MenuCollection.Add(new MenuItem("1) Verbose", () => ShowMembers("verbose"), "1", ViewType.Member));
-            MenuCollection.Add(new MenuItem("2) Compact", () => ShowMembers("compact"), "2", ViewType.Member));
-            MenuCollection.Add(new MenuItem("0) Go Back", () => StartMenu(), "0", ViewType.Member));
+            MenuCollection mc = new MenuCollection("Choose type of list:");
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Verbose", () => ShowMembers("verbose"), mc.CurrentActionKey, ViewType.Member));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Compact", () => ShowMembers("compact"), mc.CurrentActionKey, ViewType.Member));
+            mc.AddGoBackMenuItem(() => StartMenu(), ViewType.Member);
+
+            MenuCollection = mc;
         }
 
         public void ShowMembers(string format)
         {
             _memberListFormat = format;
             IReadOnlyList<Model.Member> members = _memberList.All;
-            MenuCollection = new MenuCollection("\n\nSelect member to manage by entering the corresponding number.\n\n");
+
+            MenuCollection mc = new MenuCollection("\n\nSelect member to manage by entering the corresponding number.\n\n");
+
             for (int i = 0; i < members.Count; i++)
             {
                 int copyIndex = i;
-                MenuCollection.Add(new MenuItem(
-                    $"{copyIndex + 1}){MemberToString(members[copyIndex], _memberListFormat)}",
+                mc.Add(new MenuItem(
+                    $"{mc.CurrentActionKey}){MemberToString(members[copyIndex], _memberListFormat)}",
                     () => ManageMember(members[copyIndex]),
-                    $"{copyIndex + 1}",
+                    mc.CurrentActionKey,
                     ViewType.Member
                 ));
             }
 
-            MenuCollection.Add(new MenuItem("0) Go Back", () => ChooseListType(), "0", ViewType.Member));
+            mc.AddGoBackMenuItem(() => ChooseListType(), ViewType.Member);
+
+            MenuCollection = mc;
         }
 
         private void ManageMember(Model.Member member)
         {
-            MenuCollection = new MenuCollection($"Member\n{member.Name} - {member.ID}");
+            MenuCollection mc = new MenuCollection($"Member\n{member.Name} - {member.ID}");
 
-            MenuCollection.Add(new MenuItem("1) Show member info", () => ShowMember(member), "1", ViewType.Member));
-            MenuCollection.Add(new MenuItem("2) Change info", () => UpdateMemberMenu(member), "2", ViewType.Member));
-            MenuCollection.Add(new MenuItem("3) Manage boats", () => CurrentMember = member, "3", ViewType.Boat));
-            MenuCollection.Add(new MenuItem("4) Delete member", () => DeleteMember(member), "4", ViewType.Member));
-            MenuCollection.Add(new MenuItem("0) Go back", () => ShowMembers(_memberListFormat), "0", ViewType.Member));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Show member info", () => ShowMember(member), mc.CurrentActionKey, ViewType.Member));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Change info", () => UpdateMemberMenu(member), mc.CurrentActionKey, ViewType.Member));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Manage boats", () => CurrentMember = member, mc.CurrentActionKey, ViewType.Boat));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Delete member", () => DeleteMember(member), mc.CurrentActionKey, ViewType.Member));
+
+            mc.AddGoBackMenuItem(() => ShowMembers(_memberListFormat), ViewType.Member);
+
+            MenuCollection = mc;
         }
 
         private void ShowMember(Model.Member member)
@@ -75,11 +84,13 @@ namespace View.Pages
 
         private void UpdateMemberMenu(Model.Member member)
         {
-            MenuCollection = new MenuCollection($"Change member info\n{member.Name} - {member.ID}");
+            MenuCollection mc = new MenuCollection($"Change member info\n{member.Name} - {member.ID}");
 
-            MenuCollection.Add(new MenuItem($"1) Name: ({member.Name})", () => UpdateName(member), "1", ViewType.Member));
-            MenuCollection.Add(new MenuItem($"2) PID: ({member.PID})", () => UpdatePID(member), "2", ViewType.Member));
-            MenuCollection.Add(new MenuItem("0) Go back", () => ManageMember(member), "0", ViewType.Member));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Name: ({member.Name})", () => UpdateName(member), mc.CurrentActionKey, ViewType.Member));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) PID: ({member.PID})", () => UpdatePID(member), mc.CurrentActionKey, ViewType.Member));
+            mc.AddGoBackMenuItem(() => ManageMember(member), ViewType.Member);
+
+            MenuCollection = mc;
         }
 
 
@@ -88,10 +99,10 @@ namespace View.Pages
 
             _prompt.SetPromptMessage("Enter name", member.Name);
             member.Name = _prompt.PromptQuestion(
-                    "Name can only contain 1-100 letters",
+                    $"Name can only contain {member.MinNameLength}-{member.MaxNameLength} letters and no blank spaces",
                     (string name) =>
                     {
-                        Regex rgx = new Regex(@"^[a-zA-Z\u00c0-\u017e]{1,100}$");
+                        Regex rgx = new Regex(member.ValidNameFormat);
                         return !rgx.IsMatch(name);
                     }
                 );
@@ -106,7 +117,7 @@ namespace View.Pages
                     "Valid format: YYMMDD-XXXX",
                     (string pid) =>
                     {
-                        Regex rgx = new Regex(@"^[0-9]{6}[-]{1}[0-9]{4}$");
+                        Regex rgx = new Regex(member.ValidPIDFormat);
                         return !rgx.IsMatch(pid);
                     }
                 );
@@ -137,6 +148,7 @@ namespace View.Pages
         {
             return $" Name: {member.Name}\tMember ID: {member.ID}\tNumber of boats: {member.BoatCount}";
         }
+
         private string BoatListToString(Model.Member member)
         {
             string boats = "";

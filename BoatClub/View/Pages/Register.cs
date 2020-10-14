@@ -7,7 +7,6 @@ namespace View.Pages
     {
         private Model.MemberList _memberList;
         private View.Prompt _prompt = new View.Prompt();
-
         public MenuCollection MenuCollection { get; set; }
         public Register(Model.MemberList memberList)
         {
@@ -17,9 +16,12 @@ namespace View.Pages
 
         public void SetMainMenu()
         {
-            MenuCollection = new MenuCollection("Register");
-            MenuCollection.Add(new MenuItem("1) New Member", () => Add(), "1", ViewType.Register));
-            MenuCollection.Add(new MenuItem("0) Go Back", () => { }, "0", ViewType.Member));
+            MenuCollection mc = new MenuCollection("Register");
+
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) New Member", () => Add(), mc.CurrentActionKey, ViewType.Register));
+            mc.AddGoBackMenuItem(() => { }, ViewType.Member);
+
+            MenuCollection = mc;
         }
 
         private void Add()
@@ -36,10 +38,12 @@ namespace View.Pages
         {
             _prompt.SetPromptMessage("Enter members name");
             return _prompt.PromptQuestion(
-                    "Name can only contain 1-100 letters",
+                    // TODO Remove string dependency
+                    "Name can only contain 1-40 letters",
                     (string name) =>
                     {
-                        Regex rgx = new Regex(@"^[a-zA-Z\u00c0-\u017e]{1,100}$");
+                        // TODO Remove string dependency
+                        Regex rgx = new Regex(@"^[a-zA-Z\u00c0-\u017e]{1,40}$");
                         return !rgx.IsMatch(name);
                     }
                 );
@@ -51,6 +55,7 @@ namespace View.Pages
                     "Valid format: YYMMDD-XXXX",
                     (string pid) =>
                     {
+                        // TODO Remove string dependency
                         Regex rgx = new Regex(@"^[0-9]{6}[-]{1}[0-9]{4}$");
                         return !rgx.IsMatch(pid);
                     }
