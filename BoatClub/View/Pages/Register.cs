@@ -7,7 +7,8 @@ namespace View.Pages
     {
         private Model.MemberList _memberList;
         private View.Prompt _prompt = new View.Prompt();
-        public MenuCollection MenuCollection { get; set; }
+        private MenuCollection _menuCollection;
+        public MenuCollection MenuCollection { get => _menuCollection; }
         public Register(Model.MemberList memberList)
         {
             _memberList = memberList;
@@ -21,7 +22,7 @@ namespace View.Pages
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) New Member", () => Add(), mc.CurrentActionKey, ViewType.Register));
             mc.AddGoBackMenuItem(() => { }, ViewType.Member);
 
-            MenuCollection = mc;
+            _menuCollection = mc;
         }
 
         private void Add()

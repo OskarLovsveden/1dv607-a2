@@ -7,6 +7,7 @@ namespace Model
 {
     public class Member
     {
+        private List<Boat> _boatList;
         private string _name;
         private ID _ID;
         private string _PID;
@@ -54,7 +55,7 @@ namespace Model
                 _PID = value;
             }
         }
-        public List<Boat> BoatList { get; private set; }
+        public List<Boat> BoatList { get => _boatList; }
         public int BoatCount { get => BoatList.Count; }
 
         public Member(string name, string pid)
@@ -62,7 +63,7 @@ namespace Model
             Name = name;
             PID = pid;
             _ID = new ID();
-            BoatList = new List<Boat>();
+            _boatList = new List<Boat>();
         }
 
     }

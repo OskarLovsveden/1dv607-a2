@@ -16,8 +16,8 @@ namespace Model
         public MemberList()
         {
             _members = GetMemberList();
-
         }
+
         private List<Member> GetMemberList()
         {
             return _registry.ReadListFromRegistry<Member>(_registryPath);
@@ -26,8 +26,8 @@ namespace Model
         public void UpdateMemberList()
         {
             _registry.WriteListToRegistry<Member>(_members, _registryPath);
-
         }
+
         public void Add(Member member)
         {
             _members.Add(member);
@@ -39,6 +39,5 @@ namespace Model
             _members.Remove(member);
             UpdateMemberList();
         }
-
     }
 }

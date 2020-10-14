@@ -7,8 +7,16 @@ namespace View.Pages
     public class Boat
     {
         private Prompt _prompt = new Prompt();
-        public MenuCollection MenuCollection { get; set; }
-        public Model.Member Member { get; set; }
+        private Model.Member _member;
+        private MenuCollection _menuCollection;
+
+        public MenuCollection MenuCollection { get => _menuCollection; }
+
+        public Model.Member Member
+        {
+            get => _member;
+            set => _member = value;
+        }
         public Model.MemberList _memberList;
 
         public Boat(Model.MemberList memberList)
@@ -26,7 +34,7 @@ namespace View.Pages
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) Add boat", () => Add(), mc.CurrentActionKey, ViewType.Boat));
             mc.AddGoBackMenuItem(() => { }, ViewType.Member);
 
-            MenuCollection = mc;
+            _menuCollection = mc;
         }
 
         private void ManageBoats()
@@ -47,7 +55,7 @@ namespace View.Pages
 
             mc.AddGoBackMenuItem(() => SetMainMenuCollection(), ViewType.Boat);
 
-            MenuCollection = mc;
+            _menuCollection = mc;
         }
 
         private void ManageBoat(Model.Boat boat)
@@ -60,7 +68,7 @@ namespace View.Pages
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) Delete boat", () => DeleteBoat(boat), mc.CurrentActionKey, ViewType.Boat));
             mc.AddGoBackMenuItem(() => ManageBoats(), ViewType.Boat);
 
-            MenuCollection = mc;
+            _menuCollection = mc;
         }
 
         private void ShowBoatsAsList()
