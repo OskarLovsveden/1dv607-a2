@@ -59,7 +59,7 @@ namespace View
             Console.ForegroundColor = ConsoleColor.DarkYellow;
 
             Console.WriteLine(MenuCollection.Title);
-            foreach (MenuItem item in MenuCollection.AllMenuCollection)
+            foreach (MenuItem item in MenuCollection.MenuCollectionList)
             {
                 if (item.ActionKey == MenuCollection.ExitCode)
                 {

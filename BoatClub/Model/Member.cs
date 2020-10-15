@@ -55,7 +55,7 @@ namespace Model
                 _PID = value;
             }
         }
-        public List<Boat> BoatList { get => _boatList; }
+        public IReadOnlyList<Boat> BoatList { get => _boatList.AsReadOnly(); }
         public int BoatCount { get => BoatList.Count; }
 
         public Member(string name, string pid)
@@ -64,6 +64,15 @@ namespace Model
             PID = pid;
             _ID = new ID();
             _boatList = new List<Boat>();
+        }
+
+        public void AddBoat(Boat boat)
+        {
+            _boatList.Add(boat);
+        }
+        public void RemoveBoat(Boat boat)
+        {
+            _boatList.Remove(boat);
         }
 
     }

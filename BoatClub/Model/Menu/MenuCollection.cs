@@ -9,14 +9,14 @@ namespace Model.Menu
         private readonly string _exitCode = "0";
         private string _title;
         private List<MenuItem> _allMenuItems;
-        public List<MenuItem> AllMenuCollection { get => _allMenuItems; }
+        public IReadOnlyList<MenuItem> MenuCollectionList { get => _allMenuItems.AsReadOnly(); }
         public string Title { get => _title; }
 
         public string ExitCode { get => _exitCode; }
 
         public string CurrentActionKey
         {
-            get => (AllMenuCollection.Count() + 1).ToString();
+            get => (MenuCollectionList.Count() + 1).ToString();
         }
 
         public MenuCollection(string title)
@@ -42,12 +42,12 @@ namespace Model.Menu
 
         public MenuItem Find(string selectedItem)
         {
-            return AllMenuCollection.Find(item => item.ActionKey == selectedItem);
+            return _allMenuItems.Find(item => item.ActionKey == selectedItem);
         }
 
         public bool Exists(string selectedItem)
         {
-            return AllMenuCollection.Exists(item => item.ActionKey == selectedItem);
+            return _allMenuItems.Exists(item => item.ActionKey == selectedItem);
         }
 
     }
