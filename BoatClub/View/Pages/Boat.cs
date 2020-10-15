@@ -60,7 +60,7 @@ namespace View.Pages
 
         private void ManageBoat(Model.Boat boat)
         {
-            MenuCollection mc = new MenuCollection($"{Member.Name}\n{boat}");
+            MenuCollection mc = new MenuCollection($"{Member.Name}\n{BoatToString(boat)}");
 
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) Update name", () => UpdateBoatName(boat), mc.CurrentActionKey, ViewType.Boat));
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) Update type", () => UpdateBoatType(boat), mc.CurrentActionKey, ViewType.Boat));
@@ -168,6 +168,11 @@ namespace View.Pages
             return (BoatType)Int32.Parse(result);
         }
 
+        private string BoatToString(Model.Boat boat)
+        {
+            return $"Name: {boat.Name}, Type: {boat.BoatType}, Length: {boat.Length}\n";
+        }
+
         private string BoatListToString(IReadOnlyList<Model.Boat> boatList)
         {
             string boats = "";
@@ -176,7 +181,7 @@ namespace View.Pages
 
             foreach (Model.Boat boat in boatList)
             {
-                boats += $"Name: {boat.Name}, Type: {boat.BoatType}, Length: {boat.Length}\n";
+                boats += BoatToString(boat);
             }
 
             return boats;

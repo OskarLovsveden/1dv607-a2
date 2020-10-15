@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Model
 {
@@ -7,10 +8,9 @@ namespace Model
         private Model.DAL.Registry _registry = new Model.DAL.Registry();
         private List<Member> _members;
         private string _registryPath = "Registry/MemberRegistry.json";
-
         public IReadOnlyList<Member> All
         {
-            get => _members.AsReadOnly();
+            get => _members;
         }
 
         public MemberList()
