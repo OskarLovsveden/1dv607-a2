@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace Model
 {
     public class Member
     {
+        [JsonProperty]
         private List<Boat> _boatList;
         private string _name;
         private ID _ID;
@@ -55,9 +57,10 @@ namespace Model
                 _PID = value;
             }
         }
-        public IReadOnlyList<Boat> BoatList { get => _boatList.AsReadOnly(); }
+        [JsonProperty]
+        public IReadOnlyList<Boat> BoatList { get => _boatList; }
         public int BoatCount { get => BoatList.Count; }
-
+        [JsonConstructor]
         public Member(string name, string pid)
         {
             Name = name;
