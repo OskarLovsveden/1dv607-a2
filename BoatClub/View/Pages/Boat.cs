@@ -30,7 +30,7 @@ namespace View.Pages
             MenuCollection mc = new MenuCollection($"Manage boats");
 
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) List boats", () => ShowBoatsAsList(), mc.CurrentActionKey, ViewType.Boat));
-            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Update boat information", () => ManageBoats(), mc.CurrentActionKey, ViewType.Boat));
+            mc.Add(new MenuItem($"{mc.CurrentActionKey}) Update/Delete boat", () => ManageBoats(), mc.CurrentActionKey, ViewType.Boat));
             mc.Add(new MenuItem($"{mc.CurrentActionKey}) Add boat", () => Add(), mc.CurrentActionKey, ViewType.Boat));
             mc.AddGoBackMenuItem(() => { }, ViewType.Member);
 
@@ -40,7 +40,7 @@ namespace View.Pages
         private void ManageBoats()
         {
             MenuCollection mc = new MenuCollection("Select boat to manage:");
-            List<Model.Boat> boats = Member.BoatList;
+            IReadOnlyList<Model.Boat> boats = Member.BoatList;
 
             for (int i = 0; i < boats.Count; i++)
             {
@@ -84,7 +84,7 @@ namespace View.Pages
             BoatType type = AddBoatType("Choose type of boat");
 
             Model.Boat newBoat = new Model.Boat(type, length, name);
-            Member.BoatList.Add(newBoat);
+            Member.AddBoat(newBoat);
 
             System.Console.WriteLine("\n\n" + "Member with new boat: " + Member + "\n\n");
             _memberList.UpdateMemberList();
@@ -111,7 +111,7 @@ namespace View.Pages
         }
         private void DeleteBoat(Model.Boat boat)
         {
-            Member.BoatList.Remove(boat);
+            Member.RemoveBoat(boat);
             _memberList.UpdateMemberList();
             ManageBoats();
         }
@@ -168,7 +168,7 @@ namespace View.Pages
             return (BoatType)Int32.Parse(result);
         }
 
-        private string BoatListToString(List<Model.Boat> boatList)
+        private string BoatListToString(IReadOnlyList<Model.Boat> boatList)
         {
             string boats = "";
 
